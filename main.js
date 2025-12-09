@@ -77,10 +77,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 获取当前激活的标签
         const activeTab = document.querySelector('.tab.active');
+        // 第80-150行：学生登录逻辑
         const role = activeTab.getAttribute('data-role');
         
         // Render上的后端API地址，请替换为您实际的Render后端URL
-        const API_URL = 'https://aixbot-gyzc.onrender.com/api/auth/login';
+        const API_URL = 'https://aixbot-gyzc.onrender.com';
         
         // 根据不同角色进行表单验证和提交
         if (role === 'student') {
@@ -117,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // 调用后端API进行登录验证
-                const response = await fetch(API_URL, {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -142,148 +143,120 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('登录请求失败:', error);
                 confirm('网络错误，请检查网络连接后重试！');
             }
-        } else if (role === 'teacher') {
-            // 教师登录逻辑 - 修改为姓名、工号、密码
-            const nameInput = document.getElementById('teacher-name');
-            const idInput = document.getElementById('teacher-id');
-            const passwordInput = document.getElementById('teacher-password');
+        }
+        
+        // 第150-200行：教师登录逻辑
+        else if (role === 'teacher') {
+        // 教师登录逻辑 - 修改为姓名、工号、密码
+        const nameInput = document.getElementById('teacher-name');
+        const idInput = document.getElementById('teacher-id');
+        const passwordInput = document.getElementById('teacher-password');
+        
+        // 确保所有元素都存在
+        if (!nameInput || !idInput || !passwordInput) {
+            console.error('无法找到所有表单元素');
+            alert('系统错误，请刷新页面重试！');
+            return;
+        }
+        
+        const name = nameInput.value.trim();
+        const id = idInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        // 简单验证
+        if (!name || !id || !password) {
+            confirm('提示：请填写完整的登录信息！');
+            // 聚焦到第一个空字段
+            if (!name) nameInput.focus();
+            else if (!id) idInput.focus();
+            else if (!password) passwordInput.focus();
+            return;
+        }
+        
+        try {
+            // 调用后端API进行登录验证
+            const response = await fetch(`${API_URL}/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    role: 'teacher',
+                    username: id, // 使用工号作为用户名
+                    password: password
+                })
+            });
             
-            // 确保所有元素都存在
-            if (!nameInput || !idInput || !passwordInput) {
-                console.error('无法找到所有表单元素');
-                alert('系统错误，请刷新页面重试！');
-                return;
+            const data = await response.json();
+            
+            if (data.success) {
+                // 登录成功，直接跳转
+                window.location.href = `teacher/teacher.html?teacherName=${encodeURIComponent(name)}`;
+            } else {
+                // 登录失败，显示错误信息
+                confirm('登录失败：' + data.message);
             }
+        } catch (error) {
+            console.error('登录请求失败:', error);
+            confirm('网络错误，请检查网络连接后重试！');
+        }
+        }
+        
+        // 第200-250行：家长登录逻辑
+        else if (role === 'parent') {
+        // 家长登录逻辑
+        const childNameInput = document.getElementById('child-name');
+        const accountInput = document.getElementById('parent-account');
+        const passwordInput = document.getElementById('parent-password');
+        
+        // 确保所有元素都存在
+        if (!childNameInput || !accountInput || !passwordInput) {
+            console.error('无法找到所有表单元素');
+            alert('系统错误，请刷新页面重试！');
+            return;
+        }
+        
+        const childName = childNameInput.value.trim();
+        const account = accountInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        // 简单验证
+        if (!childName || !account || !password) {
+            confirm('提示：请填写完整的登录信息！');
+            // 聚焦到第一个空字段
+            if (!childName) childNameInput.focus();
+            else if (!account) accountInput.focus();
+            else if (!password) passwordInput.focus();
+            return;
+        }
+        
+        try {
+            // 调用后端API进行登录验证
+            const response = await fetch(`${API_URL}/api/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    role: 'parent',
+                    username: account, // 使用账号作为用户名
+                    password: password
+                })
+            });
             
-            const name = nameInput.value.trim();
-            const id = idInput.value.trim();
-            const password = passwordInput.value.trim();
+            const data = await response.json();
             
-            // 简单验证
-            if (!name || !id || !password) {
-                confirm('提示：请填写完整的登录信息！');
-                // 聚焦到第一个空字段
-                if (!name) nameInput.focus();
-                else if (!id) idInput.focus();
-                else if (!password) passwordInput.focus();
-                return;
+            if (data.success) {
+                // 登录成功，直接跳转
+                window.location.href = `parents/parents.html?childName=${encodeURIComponent(childName)}`;
+            } else {
+                // 登录失败，显示错误信息
+                confirm('登录失败：' + data.message);
             }
-            
-            try {
-                // 调用后端API进行登录验证
-                // 1. 修改API_URL定义（第87行）
-                const API_URL = 'https://aixbot-gyzc.onrender.com';
-                
-                // 2. 学生登录请求（第117行）
-                const response = await fetch(`${API_URL}/api/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        role: 'student',
-                        username: studentId,
-                        password: password
-                    })
-                });
-                
-                // 3. 移除教师登录中的successToast引用（第190-197行）
-                if (data.success) {
-                    // 登录成功，直接跳转
-                    window.location.href = `teacher/teacher.html?teacherName=${encodeURIComponent(name)}`;
-                } else {
-                    // 登录失败，显示错误信息
-                    confirm('登录失败：' + data.message);
-                }
-                
-                // 4. 移除家长登录中的successToast引用（第245-252行）
-                if (data.success) {
-                    // 登录成功，直接跳转
-                    window.location.href = `parents/parents.html?childName=${encodeURIComponent(childName)}`;
-                } else {
-                    // 登录失败，显示错误信息
-                    confirm('登录失败：' + data.message);
-                }
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    // 登录成功，显示提示并跳转
-                    successToast.classList.remove('hidden');
-                    
-                    // 3秒后跳转到教师页面
-                    setTimeout(() => {
-                        // 将教师姓名作为URL参数传递
-                        window.location.href = `teacher/teacher.html?teacherName=${encodeURIComponent(name)}`;
-                    }, 1500);
-                } else {
-                    // 登录失败，显示错误信息
-                    confirm('登录失败：' + data.message);
-                }
-            } catch (error) {
-                console.error('登录请求失败:', error);
-                confirm('网络错误，请检查网络连接后重试！');
-            }
-        } else if (role === 'parent') {
-            // 家长登录逻辑 - 修改为学生姓名、账号、密码
-            const childNameInput = document.getElementById('child-name');
-            const accountInput = document.getElementById('parent-account');
-            const passwordInput = document.getElementById('parent-password');
-            
-            // 确保所有元素都存在
-            if (!childNameInput || !accountInput || !passwordInput) {
-                console.error('无法找到所有表单元素');
-                alert('系统错误，请刷新页面重试！');
-                return;
-            }
-            
-            const childName = childNameInput.value.trim();
-            const account = accountInput.value.trim();
-            const password = passwordInput.value.trim();
-            
-            // 简单验证
-            if (!childName || !account || !password) {
-                confirm('提示：请填写完整的登录信息！');
-                // 聚焦到第一个空字段
-                if (!childName) childNameInput.focus();
-                else if (!account) accountInput.focus();
-                else if (!password) passwordInput.focus();
-                return;
-            }
-            
-            try {
-                // 调用后端API进行登录验证
-                const response = await fetch(`${API_URL}/api/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        role: 'parent',
-                        username: account, // 使用账号作为用户名
-                        password: password
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    // 登录成功，显示提示并跳转
-                    successToast.classList.remove('hidden');
-                    
-                    // 3秒后跳转到家长页面
-                    setTimeout(() => {
-                        // 将孩子姓名作为URL参数传递
-                        window.location.href = `parents/parents.html?childName=${encodeURIComponent(childName)}`;
-                    }, 1500);
-                } else {
-                    // 登录失败，显示错误信息
-                    confirm('登录失败：' + data.message);
-                }
-            } catch (error) {
-                console.error('登录请求失败:', error);
-                confirm('网络错误，请检查网络连接后重试！');
-            }
+        } catch (error) {
+            console.error('登录请求失败:', error);
+            confirm('网络错误，请检查网络连接后重试！');
+        }
         }
     });
     
