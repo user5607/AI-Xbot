@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // 调用后端API进行登录验证
-                const response = await fetch(API_URL, {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // 调用后端API进行登录验证
-                const response = await fetch(API_URL, {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // 调用后端API进行登录验证
-                const response = await fetch(API_URL, {
+                const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
