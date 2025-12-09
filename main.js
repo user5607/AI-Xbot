@@ -138,7 +138,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (data.success) {
                     console.log('学生登录成功，准备跳转:', `students/students.html?studentName=${encodeURIComponent(name)}`);
-                    // 登录成功，跳转到students.html页面
+                    // 登录成功，保存用户信息到本地存储
+                    const userInfo = {
+                        role: 'student',
+                        name: name,
+                        studentId: studentId,
+                        school: school
+                    };
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    // 跳转到students.html页面
                     window.location.href = `students/students.html?studentName=${encodeURIComponent(name)}`;
                 } else {
                     // 登录失败，显示错误信息
@@ -200,6 +208,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (data.success) {
                     console.log('教师登录成功，准备跳转:', `teacher/teacher.html?teacherName=${encodeURIComponent(name)}`);
+                    // 登录成功，保存用户信息到本地存储
+                    const userInfo = {
+                        role: 'teacher',
+                        name: name,
+                        teacherId: id
+                    };
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     // 登录成功，直接跳转
                     window.location.href = `teacher/teacher.html?teacherName=${encodeURIComponent(name)}`;
                 } else {
@@ -262,6 +277,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (data.success) {
                     console.log('家长登录成功，准备跳转:', `parents/parents.html?childName=${encodeURIComponent(childName)}`);
+                    // 登录成功，保存用户信息到本地存储
+                    const userInfo = {
+                        role: 'parent',
+                        account: account,
+                        childName: childName
+                    };
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     // 登录成功，直接跳转
                     window.location.href = `parents/parents.html?childName=${encodeURIComponent(childName)}`;
                 } else {
