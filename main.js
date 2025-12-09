@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const role = activeTab.getAttribute('data-role');
         
         // Render上的后端API地址，请替换为您实际的Render后端URL
-        const API_URL = 'https://aixbot-gyzc.onrender.com';
+        const API_URL = 'https://aixbot-gyzc.onrender.com/api/auth/login';
         
         // 根据不同角色进行表单验证和提交
         if (role === 'student') {
@@ -117,14 +117,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // 调用后端API进行登录验证
-                const response = await fetch(`${API_URL}/api/auth/login`, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         role: 'student',
-                        username: studentId, // 使用学号作为用户名
+                        username: studentId,
                         password: password
                     })
                 });
@@ -171,17 +171,39 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // 调用后端API进行登录验证
+                // 1. 修改API_URL定义（第87行）
+                const API_URL = 'https://aixbot-gyzc.onrender.com';
+                
+                // 2. 学生登录请求（第117行）
                 const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        role: 'teacher',
-                        username: id, // 使用工号作为用户名
+                        role: 'student',
+                        username: studentId,
                         password: password
                     })
                 });
+                
+                // 3. 移除教师登录中的successToast引用（第190-197行）
+                if (data.success) {
+                    // 登录成功，直接跳转
+                    window.location.href = `teacher/teacher.html?teacherName=${encodeURIComponent(name)}`;
+                } else {
+                    // 登录失败，显示错误信息
+                    confirm('登录失败：' + data.message);
+                }
+                
+                // 4. 移除家长登录中的successToast引用（第245-252行）
+                if (data.success) {
+                    // 登录成功，直接跳转
+                    window.location.href = `parents/parents.html?childName=${encodeURIComponent(childName)}`;
+                } else {
+                    // 登录失败，显示错误信息
+                    confirm('登录失败：' + data.message);
+                }
                 
                 const data = await response.json();
                 
