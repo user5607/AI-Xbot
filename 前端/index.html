@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI XBot 机器人教育平台</title>
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 引入JavaScript文件 -->
+    <script src="main.js"></script>
+
+    <!-- 配置Tailwind CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#6C757D',
+                        dark: '#0F172A',
+                        light: '#F8FAFC',
+                        success: '#28A745',
+                        info: '#17A2B8',
+                        warning: '#FFC107',
+                        danger: '#DC3545',
+                        purple: {
+                            700: '#7B36D9',
+                            600: '#8A4FFF',
+                            500: '#9F6FFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(22, 93, 255, 0.1);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            }
+            .btn-gradient {
+                background: linear-gradient(135deg, #165DFF 0%, #0A4BFF 100%);
+                transition: all 0.3s ease;
+            }
+            .btn-gradient:hover {
+                background: linear-gradient(135deg, #0A4BFF 0%, #0036CC 100%);
+                transform: translateY(-2px);
+            }
+            .modal-backdrop {
+                background-color: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(4px);
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 50;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            .modal-backdrop.show {
+                opacity: 1;
+                visibility: visible;
+            }
+            .modal-content {
+                transform: scale(0.9);
+                transition: transform 0.3s ease;
+            }
+            .modal-backdrop.show .modal-content {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white min-h-screen flex flex-col">
+    <!-- 顶部导航 - 移除logo，只保留简单结构 -->
+    <header class="w-full py-4 px-6 sm:px-10 md:px-16">
+        <!-- 空白header，保持页面顶部空间 -->
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="flex-1 flex flex-col items-center justify-center px-6 sm:px-10 md:px-16 py-10 text-center">
+        <!-- Logo居中放置在页面中央 -->
+        <div class="mb-10 animate-float">
+            <img src="assets/logo.png" alt="AI XBot Logo" class="w-32 h-32 md:w-40 md:h-40 mx-auto">
+        </div>
+        
+        <!-- 平台介绍 -->
+        <div class="max-w-2xl">
+            <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-shadow mb-4">
+                通过<span class="text-blue-400">AI</span>与<span class="text-purple-400">机器人</span>
+                <br>探索编程的无限可能
+            </h2>
+            <p class="text-lg text-gray-300 mb-10 max-w-lg mx-auto">
+                AI XBot 教育平台为学生提供图形化编程环境，帮助学生通过拖放式编程块轻松学习编程概念，培养计算思维和创造力。
+            </p>
+            
+            <!-- 登录按钮居中放置 -->
+            <button id="login-btn-header" class="px-10 py-4 rounded-lg btn-gradient text-white font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                登录平台
+            </button>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="py-10 px-6 sm:px-10 md:px-16 border-t border-white/10">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="text-gray-400 text-sm">
+                &copy; 2025 山东省工研智创教育科技有限公司
+            </div>
+            
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa fa-weibo text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 登录模态框 - 修改为紫色主题 -->
+    <div id="login-modal" class="modal-backdrop">
+        <div class="modal-content bg-purple-900/70 backdrop-blur-sm rounded-xl p-8 shadow-2xl border border-purple-700/30 w-full max-w-md mx-4 relative">
+            <!-- 调整为居中布局的logo和标题 -->
+            <div class="text-center mb-6">
+                <img src="assets/logo.png" alt="AI XBot Logo" class="w-16 h-16 mx-auto mb-2">
+                <h2 class="text-2xl font-bold text-white">用户登录</h2>
+            </div>
+            
+            <!-- 关闭按钮 - 简化样式 -->
+            <button id="close-modal-btn" class="absolute text-white hover:text-gray-200 transition-colors text-xl z-10 rounded-full w-8 h-8 flex items-center justify-center" style="position: absolute; top: 1rem; right: 1rem; z-index: 10;">
+                <i class="fa fa-times"></i>
+            </button>
+            
+            <!-- 身份切换选项卡 - 修改为蓝色主题 -->
+            <div class="flex rounded-lg mb-6 overflow-hidden bg-blue-800/30">
+                <div class="tab flex-1 py-3 text-center bg-blue-600 text-white active" data-role="student">学生登录</div>
+                <div class="tab flex-1 py-3 text-center text-white/80 hover:bg-blue-700/20" data-role="teacher">教师登录</div>
+                <div class="tab flex-1 py-3 text-center text-white/80 hover:bg-blue-700/20" data-role="parent">家长登录</div>
+            </div>
+            
+            <!-- 登录表单 -->
+            <form id="landing-login-form">
+                <!-- 学生端表单字段 -->
+                <div id="student-login-fields">
+                    <div class="mb-4">
+                        <label for="school" class="block text-sm font-medium text-gray-300 mb-1">学校</label>
+                        <input type="text" id="school" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入学校名称">
+                    </div>
+                    <div class="mb-4">
+                        <label for="student-name" class="block text-sm font-medium text-gray-300 mb-1">姓名</label>
+                        <input type="text" id="student-name" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入姓名">
+                    </div>
+                    <div class="mb-4">
+                        <label for="student-id" class="block text-sm font-medium text-gray-300 mb-1">学号</label>
+                        <input type="text" id="student-id" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入学号">
+                    </div>
+                    <div class="mb-6">
+                        <label for="student-password" class="block text-sm font-medium text-gray-300 mb-1">密码</label>
+                        <div class="relative">
+                            <input type="password" id="student-password" class="w-full px-4 py-2 pr-10 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入密码">
+                            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors" data-target="student-password">
+                                <i class="fa fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 教师端表单字段 -->
+                <div id="teacher-login-fields" class="hidden">
+                    <div class="mb-4">
+                        <label for="teacher-name" class="block text-sm font-medium text-gray-300 mb-1">姓名</label>
+                        <input type="text" id="teacher-name" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入姓名">
+                    </div>
+                    <div class="mb-4">
+                        <label for="teacher-id" class="block text-sm font-medium text-gray-300 mb-1">工号</label>
+                        <input type="text" id="teacher-id" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入工号">
+                    </div>
+                    <div class="mb-6">
+                        <label for="teacher-password" class="block text-sm font-medium text-gray-300 mb-1">密码</label>
+                        <div class="relative">
+                            <input type="password" id="teacher-password" class="w-full px-4 py-2 pr-10 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入密码">
+                            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors" data-target="teacher-password">
+                                <i class="fa fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 家长端表单字段 -->
+                <div id="parent-login-fields" class="hidden">
+                    <div class="mb-4">
+                        <label for="child-name" class="block text-sm font-medium text-gray-300 mb-1">孩子姓名</label>
+                        <input type="text" id="child-name" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入孩子姓名">
+                    </div>
+                    <div class="mb-4">
+                        <label for="parent-account" class="block text-sm font-medium text-gray-300 mb-1">账号</label>
+                        <input type="text" id="parent-account" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入账号">
+                    </div>
+                    <div class="mb-6">
+                        <label for="parent-password" class="block text-sm font-medium text-gray-300 mb-1">密码</label>
+                        <div class="relative">
+                            <input type="password" id="parent-password" class="w-full px-4 py-2 pr-10 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="请输入密码">
+                            <button type="button" class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors" data-target="parent-password">
+                                <i class="fa fa-eye-slash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full py-3 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-medium transition-colors">
+                    登录
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 登录成功提示 -->
+    <div id="success-toast" class="fixed bottom-5 right-5 bg-purple-700/20 backdrop-blur-sm border border-purple-600/30 rounded-lg p-4 hidden">
+        <div class="flex items-center">
+            <i class="fa fa-check-circle text-xl text-purple-400 mr-3"></i>
+            <div>
+                <p class="font-medium">登录成功</p>
+                <p class="text-sm text-gray-300">正在进入平台...</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

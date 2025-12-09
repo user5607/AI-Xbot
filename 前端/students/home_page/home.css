@@ -1,0 +1,261 @@
+/* 首页特定样式 */
+
+/* 首页容器 */
+#home-page {
+    transition: opacity 0.3s ease;
+}
+
+/* 首页背景 */
+#home-page .bg-gradient-to-r {
+    background: linear-gradient(135deg, #6d28d9 0%, #4338ca 50%, #3b82f6 100%);
+}
+
+/* 背景装饰元素 */
+#home-page .absolute.inset-0.opacity-20 {
+    background: radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.2) 0%, rgba(59, 130, 246, 0.2) 90.1%);
+}
+
+/* 小机器人基础样式 */
+.robot {
+    position: absolute;
+    opacity: 0.7;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+    animation: subtleFloat 5s ease-in-out infinite;
+}
+
+/* 小机器人眼睛闪烁动画 */
+.robot-eye {
+    animation: blink 3s infinite;
+}
+
+/* 动画关键帧定义 */
+@keyframes blink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0; }
+}
+
+@keyframes subtleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes enhancedNeonPulse {
+    0% {
+        text-shadow: 
+            0 0 15px rgba(138, 43, 226, 1),
+            0 0 30px rgba(138, 43, 226, 0.8),
+            0 0 45px rgba(138, 43, 226, 0.6),
+            0 0 60px rgba(138, 43, 226, 0.4);
+    }
+    100% {
+        text-shadow: 
+            0 0 20px rgba(138, 43, 226, 1),
+            0 0 40px rgba(138, 43, 226, 0.9),
+            0 0 60px rgba(138, 43, 226, 0.8),
+            0 0 80px rgba(138, 43, 226, 0.6);
+    }
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes subtleGlow {
+    0% {
+        text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+    }
+    100% {
+        text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+    }
+}
+
+@keyframes glow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    }
+    100% {
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+    }
+}
+
+@keyframes gridMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 20px 20px;
+    }
+}
+
+@keyframes pulse-slow {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 小机器人位置和动画 */
+.robot-1 { top: 10%; left: 8%; width: 80px; height: 80px; animation: robotMove1 20s ease-in-out infinite; }
+.robot-2 { top: 15%; right: 10%; width: 60px; height: 60px; animation: robotMove2 18s ease-in-out infinite reverse; }
+.robot-3 { bottom: 20%; left: 12%; width: 70px; height: 70px; animation: robotMove3 22s ease-in-out infinite; }
+.robot-4 { bottom: 15%; right: 8%; width: 50px; height: 50px; animation: robotMove4 15s ease-in-out infinite reverse; }
+
+/* 机器人移动动画 */
+@keyframes robotMove1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(30px, -20px) rotate(5deg); }
+    50% { transform: translate(10px, -40px) rotate(-5deg); }
+    75% { transform: translate(-20px, -10px) rotate(3deg); }
+}
+
+@keyframes robotMove2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-20px, 30px) rotate(-3deg); }
+    50% { transform: translate(-40px, 10px) rotate(5deg); }
+    75% { transform: translate(-10px, -20px) rotate(-2deg); }
+}
+
+@keyframes robotMove3 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(40px, 10px) rotate(2deg); }
+    50% { transform: translate(20px, 30px) rotate(-3deg); }
+    75% { transform: translate(-10px, 15px) rotate(1deg); }
+}
+
+@keyframes robotMove4 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(15px, 20px) rotate(-4deg); }
+    50% { transform: translate(5px, 40px) rotate(2deg); }
+    75% { transform: translate(-15px, 25px) rotate(-1deg); }
+}
+
+/* 标题和副标题样式 */
+.tech-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    text-shadow: 
+        0 0 15px rgba(138, 43, 226, 1),
+        0 0 30px rgba(138, 43, 226, 0.8),
+        0 0 45px rgba(138, 43, 226, 0.6),
+        0 0 60px rgba(138, 43, 226, 0.4);
+    animation: enhancedNeonPulse 1.5s ease-in-out infinite alternate, titleFloat 6s ease-in-out infinite;
+    transition: all 0.4s ease;
+    border-bottom: 2px solid rgba(138, 43, 226, 0.6);
+    padding-bottom: 5px;
+}
+
+.tech-subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #e9d5ff;
+    text-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+    animation: subtleGlow 4s ease-in-out infinite alternate;
+}
+
+/* Logo发光效果 */
+.tech-glow {
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+/* 动态网格背景 */
+.tech-grid {
+    background-image: 
+        linear-gradient(rgba(138, 43, 226, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(138, 43, 226, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: gridMove 15s linear infinite;
+    opacity: 0.7;
+}
+
+/* 特性卡片样式 */
+#home-page .bg-white\/10 {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+#home-page .bg-white\/10:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(138, 43, 226, 0.3);
+}
+
+/* 开始学习按钮效果 */
+#start-programming-btn {
+    background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#start-programming-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transition: left 0.5s ease;
+}
+
+#start-programming-btn:hover::before {
+    left: 100%;
+}
+
+/* 优势点图标容器 */
+#home-page .rounded-full.w-20 {
+    transition: all 0.3s ease;
+}
+
+#home-page .rounded-full.w-20:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .tech-title {
+        font-size: 2.5rem !important;
+        letter-spacing: 1px;
+    }
+    
+    .tech-subtitle {
+        font-size: 1.2rem !important;
+    }
+    
+    .robot {
+        transform: scale(0.7);
+    }
+    
+    .robot-1 { top: 5%; left: 5%; }
+    .robot-2 { top: 10%; right: 5%; }
+    .robot-3 { bottom: 15%; left: 5%; }
+    .robot-4 { bottom: 10%; right: 5%; }
+}
+
+@media (max-width: 480px) {
+    .tech-title {
+        font-size: 2rem !important;
+    }
+    
+    .tech-subtitle {
+        font-size: 1rem !important;
+    }
+    
+    #home-page .grid-cols-1\.md\:grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    #home-page .grid-cols-1\.md\:grid-cols-2\.lg\:grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+}

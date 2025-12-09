@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI XBot 机器人图形化编程平台 - 教师端</title>
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <!-- Tailwind 配置 - 简化配置，减少冲突可能性 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#7c3aed',
+                        accent: '#0ea5e9',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444'
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-down': 'slideDown 0.3s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 内联一些关键样式，确保立即生效 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto { content-visibility: auto; }
+            .sidebar-active-item { @apply bg-primary/10 text-primary border-r-4 border-primary; }
+        }
+    </style>
+    
+    <!-- 引入自定义样式和脚本 - 添加版本参数避免缓存 -->
+    <link rel="stylesheet" href="teacher.css?v=1.0">
+    <script src="teacher.js" defer></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 侧边栏导航 -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- 移动端菜单按钮 -->
+        <button id="mobile-menu-button" class="md:hidden fixed top-4 left-4 z-50 bg-primary text-white p-2 rounded-lg">
+            <i class="fa fa-bars text-xl"></i>
+        </button>
+        
+        <!-- 侧边栏 -->
+        <aside id="sidebar" class="fixed md:relative w-64 h-full bg-white shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-40">
+            <!-- 侧边栏头部 -->
+            <div class="flex items-center justify-center p-4 border-b">
+                <img src="../assets/logo.png" alt="AI XBot 平台" class="w-10 h-10">
+                <h1 class="ml-3 text-lg font-bold text-primary">AI XBot</h1>
+            </div>
+            
+            <!-- 侧边栏导航 -->
+            <nav class="mt-5 px-2">
+                <a href="#dashboard" class="flex items-center px-4 py-3 text-primary bg-purple-100 rounded-lg mb-1">
+                    <i class="fa fa-tachometer w-6"></i>
+                    <span class="ml-3 font-medium">数据总览</span>
+                </a>
+                
+                <div class="mb-2">
+                    <div class="flex items-center px-4 py-2 text-gray-700 cursor-pointer sidebar-dropdown-toggle">
+                        <i class="fa fa-graduation-cap w-6"></i>
+                        <span class="ml-3 font-medium">课程与班级管理</span>
+                        <i class="fa fa-chevron-down ml-auto transition-transform duration-300 sidebar-dropdown-icon"></i>
+                    </div>
+                    <div class="sidebar-dropdown hidden pl-10">
+                        <a href="#classes" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">班级管理</a>
+                        <a href="#courses" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">课程管理</a>
+                        <a href="#teaching-resources" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">教学资源库</a>
+                    </div>
+                </div>
+                
+                <div class="mb-2">
+                    <div class="flex items-center px-4 py-2 text-gray-700 cursor-pointer sidebar-dropdown-toggle">
+                        <i class="fa fa-line-chart w-6"></i>
+                        <span class="ml-3 font-medium">学情分析与评价</span>
+                        <i class="fa fa-chevron-down ml-auto transition-transform duration-300 sidebar-dropdown-icon"></i>
+                    </div>
+                    <div class="sidebar-dropdown hidden pl-10">
+                        <a href="#student-dashboard" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">学生数据看板</a>
+                        <a href="#homework" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">作业批改</a>
+                        <a href="#feedback" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">个性化反馈</a>
+                    </div>
+                </div>
+                
+                <div class="mb-2">
+                    <div class="flex items-center px-4 py-2 text-gray-700 cursor-pointer sidebar-dropdown-toggle">
+                        <i class="fa fa-comments w-6"></i>
+                        <span class="ml-3 font-medium">教学互动</span>
+                        <i class="fa fa-chevron-down ml-auto transition-transform duration-300 sidebar-dropdown-icon"></i>
+                    </div>
+                    <div class="sidebar-dropdown hidden pl-10">
+                        <a href="#qa" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">实时答疑</a>
+                        <a href="#teaching" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">直播/录播教学</a>
+                        <a href="#reviews" class="block px-4 py-2 text-gray-600 hover:bg-purple-50 rounded">作品点评</a>
+                    </div>
+                </div>
+                
+                <a href="#settings" class="flex items-center px-4 py-3 text-gray-700 hover:bg-purple-50 rounded-lg mb-1">
+                    <i class="fa fa-cog w-6"></i>
+                    <span class="ml-3 font-medium">系统设置</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- 主内容区域 -->
+        <main class="flex-1 overflow-y-auto bg-gray-50">
+            <!-- 顶部导航栏 -->
+            <header class="bg-white shadow-sm sticky top-0 z-30">
+                <div class="flex justify-between items-center px-6 py-3">
+                    <div class="flex items-center">
+                        <h2 class="text-lg font-semibold text-gray-800">数据总览</h2>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="relative p-2 text-gray-500 hover:text-primary">
+                            <i class="fa fa-bell text-xl"></i>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <button class="relative p-2 text-gray-500 hover:text-primary">
+                            <i class="fa fa-envelope text-xl"></i>
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                        <!-- 添加用户菜单按钮 -->
+                        <button id="user-menu-button" class="flex items-center p-1 rounded hover:bg-gray-100">
+                            <span class="mr-1 text-gray-700">李老师</span>
+                            <i class="fa fa-chevron-down text-xs text-gray-500"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- 数据总览区域 -->
+            <section id="dashboard" class="p-6">
+                <!-- 统计卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- 学生总数卡片 -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">学生总数</h3>
+                            <span class="bg-blue-100 text-blue-600 p-2 rounded-lg">
+                                <i class="fa fa-users"></i>
+                            </span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800">128</div>
+                        <div class="flex items-center mt-2 text-sm">
+                            <span class="text-green-500 flex items-center">
+                                <i class="fa fa-arrow-up mr-1"></i>12.5%
+                            </span>
+                            <span class="text-gray-500 ml-2">较上月</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 班级总数卡片 -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">班级总数</h3>
+                            <span class="bg-purple-100 text-purple-600 p-2 rounded-lg">
+                                <i class="fa fa-graduation-cap"></i>
+                            </span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800">6</div>
+                        <div class="flex items-center mt-2 text-sm">
+                            <span class="text-green-500 flex items-center">
+                                <i class="fa fa-arrow-up mr-1"></i>20%
+                            </span>
+                            <span class="text-gray-500 ml-2">较上学期</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 活跃率卡片 -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">学生活跃率</h3>
+                            <span class="bg-green-100 text-green-600 p-2 rounded-lg">
+                                <i class="fa fa-line-chart"></i>
+                            </span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800">89.2%</div>
+                        <div class="flex items-center mt-2 text-sm">
+                            <span class="text-green-500 flex items-center">
+                                <i class="fa fa-arrow-up mr-1"></i>5.3%
+                            </span>
+                            <span class="text-gray-500 ml-2">本周</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 作品提交数卡片 -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 font-medium">作品提交数</h3>
+                            <span class="bg-amber-100 text-amber-600 p-2 rounded-lg">
+                                <i class="fa fa-code"></i>
+                            </span>
+                        </div>
+                        <div class="text-3xl font-bold text-gray-800">256</div>
+                        <div class="flex items-center mt-2 text-sm">
+                            <span class="text-green-500 flex items-center">
+                                <i class="fa fa-arrow-up mr-1"></i>18.7%
+                            </span>
+                            <span class="text-gray-500 ml-2">本月</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 图表区域 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <!-- 学习进度图表 -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-semibold text-gray-800">学生学习进度</h3>
+                            <div class="text-sm text-gray-500">过去 7 天</div>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- 知识点掌握情况图表 -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-semibold text-gray-800">知识点掌握情况</h3>
+                            <div class="text-sm text-gray-500">最近一次测试</div>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="knowledgeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 近期活动 -->
+                <div class="bg-white rounded-xl shadow-card p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-semibold text-gray-800">近期活动</h3>
+                        <a href="#" class="text-primary text-sm hover:underline">查看全部</a>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- 活动项 1 -->
+                        <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="bg-blue-100 text-blue-600 p-2 rounded-full mr-4">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-800">编程比赛报名截止</h4>
+                                    <span class="text-sm text-gray-500">今天 18:00</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">校级机器人编程大赛报名即将截止，请提醒学生及时报名。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 活动项 2 -->
+                        <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="bg-green-100 text-green-600 p-2 rounded-full mr-4">
+                                <i class="fa fa-home"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-800">新作业待批改</h4>
+                                    <span class="text-sm text-gray-500">2小时前</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">三年级一班有15名学生提交了"循环结构"练习作业。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 活动项 3 -->
+                        <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="bg-purple-100 text-purple-600 p-2 rounded-full mr-4">
+                                <i class="fa fa-user-plus"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-800">新学生加入</h4>
+                                    <span class="text-sm text-gray-500">昨天</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">有3名新学生加入了四年级二班的编程课程。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 活动项 4 -->
+                        <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                            <div class="bg-amber-100 text-amber-600 p-2 rounded-full mr-4">
+                                <i class="fa fa-bell"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h4 class="font-medium text-gray-800">系统更新通知</h4>
+                                    <span class="text-sm text-gray-500">3天前</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">平台将于本周五晚22:00-24:00进行系统升级维护。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 班级管理区域 -->
+            <section id="classes" class="p-6 hidden">
+                <div class="bg-white rounded-xl shadow-card p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-semibold text-gray-800">班级列表</h3>
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus mr-2"></i>新建班级
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">班级名称</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">学生人数</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">活跃度</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">平均成绩</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">三年级一班</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">25</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 92%"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-600">92%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-sm font-medium text-gray-900">88.5</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-primary hover:text-primary/80 mr-3">查看</a>
+                                        <a href="#" class="text-blue-500 hover:text-blue-400 mr-3">编辑</a>
+                                        <a href="#" class="text-red-500 hover:text-red-400">删除</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">三年级二班</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">22</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-600">85%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-sm font-medium text-gray-900">82.3</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-primary hover:text-primary/80 mr-3">查看</a>
+                                        <a href="#" class="text-blue-500 hover:text-blue-400 mr-3">编辑</a>
+                                        <a href="#" class="text-red-500 hover:text-red-400">删除</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="font-medium text-gray-900">四年级一班</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">28</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 78%"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-600">78%</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="text-sm font-medium text-gray-900">79.8</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="#" class="text-primary hover:text-primary/80 mr-3">查看</a>
+                                        <a href="#" class="text-blue-500 hover:text-blue-400 mr-3">编辑</a>
+                                        <a href="#" class="text-red-500 hover:text-red-400">删除</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 课程管理区域 -->
+            <section id="courses" class="p-6 hidden">
+                <div class="bg-white rounded-xl shadow-card p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-semibold text-gray-800">课程列表</h3>
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-plus mr-2"></i>创建课程
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- 课程卡片 1 -->
+                        <div class="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                            <div class="bg-primary/10 p-4">
+                                <h4 class="font-semibold text-lg text-gray-800">Scratch基础入门</h4>
+                                <p class="text-sm text-gray-600 mt-1">适合年龄：8-10岁</p>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded">初级</span>
+                                    <span class="text-sm text-gray-500">12课时</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">学习Scratch编程基础，包括角色控制、事件处理和简单动画制作。</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-500"><i class="fa fa-users mr-1"></i>45人学习</span>
+                                    <a href="#" class="text-primary hover:text-primary/80 text-sm">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 课程卡片 2 -->
+                        <div class="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                            <div class="bg-primary/10 p-4">
+                                <h4 class="font-semibold text-lg text-gray-800">Python编程进阶</h4>
+                                <p class="text-sm text-gray-600 mt-1">适合年龄：12-15岁</p>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="text-sm bg-purple-100 text-purple-600 px-2 py-1 rounded">中级</span>
+                                    <span class="text-sm text-gray-500">16课时</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">深入学习Python编程，包括函数、模块、文件操作和简单算法。</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-500"><i class="fa fa-users mr-1"></i>32人学习</span>
+                                    <a href="#" class="text-primary hover:text-primary/80 text-sm">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 课程卡片 3 -->
+                        <div class="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                            <div class="bg-primary/10 p-4">
+                                <h4 class="font-semibold text-lg text-gray-800">机器人控制编程</h4>
+                                <p class="text-sm text-gray-600 mt-1">适合年龄：10-14岁</p>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="text-sm bg-green-100 text-green-600 px-2 py-1 rounded">中级</span>
+                                    <span class="text-sm text-gray-500">14课时</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4">学习机器人传感器使用、运动控制和任务编程，培养实践能力。</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-500"><i class="fa fa-users mr-1"></i>28人学习</span>
+                                    <a href="#" class="text-primary hover:text-primary/80 text-sm">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 在现有section后添加作品点评区域 -->
+            <section id="reviews" class="p-6 hidden">
+                <div class="bg-white rounded-xl shadow-card p-6 mb-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-semibold text-gray-800 text-xl">作品点评</h3>
+                    </div>
+                    
+                    <!-- 作品点评表单 -->
+                    <div class="space-y-6">
+                        <!-- 学生选择 -->
+                        <div>
+                            <label for="student-select" class="block text-sm font-medium text-gray-700 mb-1">选择学生</label>
+                            <select id="student-select" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+                                <option value="">-- 请选择学生 --</option>
+                                <option value="小明">小明</option>
+                                <option value="小红">小红</option>
+                                <option value="小李">小李</option>
+                                <option value="小王">小王</option>
+                                <!-- 可根据实际情况动态添加更多学生 -->
+                            </select>
+                        </div>
+                        
+                        <!-- 作品名称 -->
+                        <div>
+                            <label for="work-name" class="block text-sm font-medium text-gray-700 mb-1">作品名称</label>
+                            <input type="text" id="work-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="请输入作品名称">
+                        </div>
+                        
+                        <!-- 点评内容 -->
+                        <div>
+                            <label for="review-content" class="block text-sm font-medium text-gray-700 mb-1">点评内容</label>
+                            <textarea id="review-content" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="请输入对作品的点评..."></textarea>
+                        </div>
+                        
+                        <!-- 评分 -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">评分</label>
+                            <div class="flex space-x-2" id="rating-stars">
+                                <i class="fa fa-star text-gray-300 cursor-pointer text-xl hover:text-yellow-400" data-rating="1"></i>
+                                <i class="fa fa-star text-gray-300 cursor-pointer text-xl hover:text-yellow-400" data-rating="2"></i>
+                                <i class="fa fa-star text-gray-300 cursor-pointer text-xl hover:text-yellow-400" data-rating="3"></i>
+                                <i class="fa fa-star text-gray-300 cursor-pointer text-xl hover:text-yellow-400" data-rating="4"></i>
+                                <i class="fa fa-star text-gray-300 cursor-pointer text-xl hover:text-yellow-400" data-rating="5"></i>
+                                <input type="hidden" id="rating-value" value="0">
+                            </div>
+                        </div>
+                        
+                        <!-- 发送按钮 -->
+                        <div class="flex justify-end">
+                            <button id="send-review-btn" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors flex items-center">
+                                <i class="fa fa-paper-plane mr-2"></i> 发送点评
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 历史点评记录 -->
+                    <div class="bg-white rounded-xl shadow-card p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-semibold text-gray-800">历史点评记录</h3>
+                        </div>
+                        <div id="review-history" class="space-y-4">
+                            <!-- 点评记录将通过JavaScript动态生成 -->
+                            <div class="text-gray-500 text-center py-8">暂无点评记录</div>
+                        </div>
+                    </div>
+                </section>
+            
+            <!-- 近期活动 -->
+            <div class="bg-white rounded-xl shadow-card p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-semibold text-gray-800">近期活动</h3>
+                    <a href="#" class="text-primary text-sm hover:underline">查看全部</a>
+                </div>
+                <div class="space-y-4">
+                    <!-- 活动项 1 -->
+                    <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-full mr-4">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h4 class="font-medium text-gray-800">编程比赛报名截止</h4>
+                                <span class="text-sm text-gray-500">今天 18:00</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">校级机器人编程大赛报名即将截止，请提醒学生及时报名。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 活动项 2 -->
+                    <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="bg-green-100 text-green-600 p-2 rounded-full mr-4">
+                            <i class="fa fa-home"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h4 class="font-medium text-gray-800">新作业待批改</h4>
+                                <span class="text-sm text-gray-500">2小时前</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">三年级一班有15名学生提交了"循环结构"练习作业。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 活动项 3 -->
+                    <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="bg-purple-100 text-purple-600 p-2 rounded-full mr-4">
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h4 class="font-medium text-gray-800">新学生加入</h4>
+                                <span class="text-sm text-gray-500">昨天</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">有3名新学生加入了四年级二班的编程课程。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 活动项 4 -->
+                    <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="bg-amber-100 text-amber-600 p-2 rounded-full mr-4">
+                            <i class="fa fa-bell"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <h4 class="font-medium text-gray-800">系统更新通知</h4>
+                                <span class="text-sm text-gray-500">3天前</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">平台将于本周五晚22:00-24:00进行系统升级维护。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 其他区域内容可以类似添加 -->
+        </main>
+    </div>
+
+    <!-- 用户菜单模态框 -->
+    <div id="user-menu-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl max-w-sm w-full mx-4 transform transition-all">
+            <div class="p-5 border-b">
+                <div class="flex items-center">
+                    <!-- 移除头像图片 -->
+                    <div>
+                        <h3 class="font-semibold text-gray-800">李老师</h3>
+                        <p class="text-sm text-gray-500">高级教师</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2">
+                <button class="w-full text-left px-4 py-3 rounded hover:bg-gray-100 flex items-center">
+                    <i class="fa fa-user-circle w-6 text-gray-500"></i>
+                    <span class="ml-2 text-gray-700">个人信息</span>
+                </button>
+                <button class="w-full text-left px-4 py-3 rounded hover:bg-gray-100 flex items-center">
+                    <i class="fa fa-cog w-6 text-gray-500"></i>
+                    <span class="ml-2 text-gray-700">账户设置</span>
+                </button>
+                <button class="w-full text-left px-4 py-3 rounded hover:bg-gray-100 flex items-center">
+                    <i class="fa fa-question-circle w-6 text-gray-500"></i>
+                    <span class="ml-2 text-gray-700">帮助中心</span>
+                </button>
+                <div class="border-t my-2"></div>
+                <button id="logout-btn" class="w-full text-left px-4 py-3 rounded hover:bg-gray-100 flex items-center text-red-600">
+                    <i class="fa fa-sign-out w-6"></i>
+                    <span class="ml-2">退出登录</span>
+                </button>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-b-lg">
+                <button id="close-user-menu" class="w-full py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

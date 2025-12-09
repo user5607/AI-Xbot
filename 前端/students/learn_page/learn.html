@@ -1,0 +1,176 @@
+<!-- 学习中心页面 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>学习中心 - AI XBot</title>
+        <!-- 引入外部资源 -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- 引入内部资源 -->
+        <link rel="stylesheet" href="learn.css">
+        <script src="learn.js" defer></script>
+    </head>
+    <body class="bg-[#1E293B] flex flex-col text-white min-h-screen">       
+        <!-- 学习中心页面 -->
+        <div class="flex-1">
+            <div id="learn-page" class="flex-1 flex flex-col">
+                <!-- 页面头部 -->
+                <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-6 border-b border-[#334155]">
+                    <div class="container mx-auto">
+                        <h1 class="text-3xl font-bold mb-2">学习中心</h1>
+                        <p class="text-gray-300">探索机器人编程知识，提升您的编程技能</p>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="flex-1 overflow-auto p-6">
+                    <div class="container mx-auto">
+                        <!-- 学习分类 -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- 基础教程 -->
+                            <div class="bg-[#0F172A] rounded-lg shadow-lg p-6 border border-[#334155] transition-all hover:shadow-blue-900/20 hover:-translate-y-1">
+                                <div class="bg-blue-500/20 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                                    <i class="fa fa-graduation-cap text-blue-400 text-3xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">基础教程</h3>
+                                <p class="text-gray-400 mb-4">学习机器人编程的基础知识，包括基本动作控制和简单逻辑。</p>
+                                <div class="space-y-3">
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-blue-400 mr-3"></i>
+                                            <span>机器人基础概念</span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-blue-400 mr-3"></i>
+                                            <span>基本动作控制</span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-blue-400 mr-3"></i>
+                                            <span>声音模块使用</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- 进阶课程 -->
+                            <div class="bg-[#0F172A] rounded-lg shadow-lg p-6 border border-[#334155] transition-all hover:shadow-blue-900/20 hover:-translate-y-1">
+                                <div class="bg-purple-500/20 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                                    <i class="fa fa-cogs text-purple-400 text-3xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">进阶课程</h3>
+                                <p class="text-gray-400 mb-4">深入学习控制结构、传感器应用和复杂动作序列编程。</p>
+                                <div class="space-y-3">
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-purple-400 mr-3"></i>
+                                            <span>条件控制与循环</span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-purple-400 mr-3"></i>
+                                            <span>传感器应用</span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-purple-400 mr-3"></i>
+                                            <span>复杂动作编排</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- 机器狗专题 -->
+                            <div class="bg-[#0F172A] rounded-lg shadow-lg p-6 border border-[#334155] transition-all hover:shadow-blue-900/20 hover:-translate-y-1">
+                                <div class="bg-green-500/20 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                                    <i class="fa fa-paw text-green-400 text-3xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">机器狗专题</h3>
+                                <p class="text-gray-400 mb-4">专为四自由度和八自由度机器狗设计的专题课程。</p>
+                                <div class="space-y-3">
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-green-400 mr-3"></i>
+                                            <span>机器狗运动原理</span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-green-400 mr-3"></i>
+                                            <span>步态编程指南</span>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="block bg-[#1E293B] hover:bg-[#334155] p-3 rounded-lg transition-colors">
+                                        <div class="flex items-center">
+                                            <i class="fa fa-book text-green-400 mr-3"></i>
+                                            <span>高级姿态控制</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 学习资源 -->
+                        <div class="mt-10">
+                            <h2 class="text-2xl font-bold mb-6">学习资源</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-[#0F172A] rounded-lg shadow-lg p-6 border border-[#334155]">
+                                    <h3 class="text-xl font-bold mb-4">视频教程</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center bg-[#1E293B] p-4 rounded-lg">
+                                            <div class="bg-blue-500/20 rounded-md w-20 h-20 flex items-center justify-center mr-4">
+                                                <i class="fa fa-play-circle text-blue-400 text-3xl"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium">入门指南：认识你的机器狗</h4>
+                                                <p class="text-gray-400 text-sm mt-1">10:25</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center bg-[#1E293B] p-4 rounded-lg">
+                                            <div class="bg-blue-500/20 rounded-md w-20 h-20 flex items-center justify-center mr-4">
+                                                <i class="fa fa-play-circle text-blue-400 text-3xl"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="font-medium">第一个程序：让机器狗动起来</h4>
+                                                <p class="text-gray-400 text-sm mt-1">15:40</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-[#0F172A] rounded-lg shadow-lg p-6 border border-[#334155]">
+                                    <h3 class="text-xl font-bold mb-4">编程示例</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex items-center justify-between bg-[#1E293B] p-4 rounded-lg">
+                                            <div>
+                                                <h4 class="font-medium">正方形巡逻</h4>
+                                                <p class="text-gray-400 text-sm mt-1">基础动作示例</p>
+                                            </div>
+                                            <button class="bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                                查看示例
+                                            </button>
+                                        </div>
+                                        <div class="flex items-center justify-between bg-[#1E293B] p-4 rounded-lg">
+                                            <div>
+                                                <h4 class="font-medium">避障行走</h4>
+                                                <p class="text-gray-400 text-sm mt-1">传感器应用示例</p>
+                                            </div>
+                                            <button class="bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded-lg text-sm transition-colors">
+                                                查看示例
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

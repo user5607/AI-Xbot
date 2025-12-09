@@ -1,0 +1,475 @@
+/* 登录页面样式 - 科技感增强 */
+
+/* 登录模态框背景 - 与 index.html 中的结构匹配 */
+#login-modal.modal-backdrop {
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+}
+
+/* 登录模态框内容容器 - 调整为匹配 index.html 的结构 */
+#login-modal .modal-content {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 10px 40px rgba(138, 43, 226, 0.25),
+        0 0 60px rgba(138, 43, 226, 0.15);
+    animation: slideUp 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* 添加背景装饰效果 */
+#login-modal .modal-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 70%);
+    animation: rotate 25s linear infinite;
+    z-index: 0;
+}
+
+/* 登录模态框内部内容 */
+#login-modal .modal-content > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 关闭按钮样式优化 */
+#close-modal-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    padding: 8px;
+    transition: all 0.3s ease;
+    color: #94A3B8;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#close-modal-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+    color: #ffffff;
+}
+
+/* 身份选择切换标签样式 */
+#login-modal .tab {
+    position: relative;
+    transition: all 0.3s ease;
+    z-index: 1;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#login-modal .tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8A2BE2, transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+#login-modal .tab.active {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#login-modal .tab.active::after {
+    transform: scaleX(1);
+}
+
+#login-modal .tab:hover:not(.active) {
+    background: rgba(138, 43, 226, 0.1);
+    color: #e2e8f0;
+}
+
+/* 登录表单样式 */
+#landing-login-form {
+    position: relative;
+    z-index: 1;
+}
+
+/* 表单字段标签样式 */
+#landing-login-form label {
+    color: #E2E8F0;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+/* 输入字段样式优化 */
+#landing-login-form input {
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* 密码可见性切换按钮样式 */
+.password-toggle {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    padding: 8px;
+    border: none;
+    background: none;
+    outline: none;
+    transition: opacity 0.3s ease;
+}
+
+.password-toggle:hover {
+    opacity: 0.8;
+}
+
+.password-toggle i {
+    font-size: 18px;
+    color: #cbd5e1;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover i {
+    color: #ffffff;
+}
+
+#landing-login-form input:focus {
+    border-color: #8A2BE2;
+    box-shadow: 
+        0 0 0 3px rgba(138, 43, 226, 0.2),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 41, 59, 0.9);
+    transform: translateY(-1px);
+}
+
+#landing-login-form input::placeholder {
+    color: #64748B;
+    transition: color 0.3s ease;
+}
+
+#landing-login-form input:focus::placeholder {
+    color: #94A3B8;
+}
+
+/* 登录按钮样式增强 */
+#landing-login-form button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: linear-gradient(135deg, #8A2BE2 0%, #7B2CBF 100%);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+#landing-login-form button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+    z-index: -1;
+}
+
+#landing-login-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+    background: linear-gradient(135deg, #7B2CBF 0%, #6B21A8 100%);
+}
+
+#landing-login-form button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* 链接样式优化 */
+#landing-login-form a {
+    transition: all 0.3s ease;
+    position: relative;
+    color: #8A2BE2;
+    text-decoration: none;
+}
+
+#landing-login-form a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+#landing-login-form a:hover {
+    color: #A78BFA;
+}
+
+#landing-login-form a:hover::after {
+    transform: scaleX(1);
+}
+
+/* 登录成功提示样式优化 */
+#success-toast {
+    animation: slideInRight 0.5s ease;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* 动画定义 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px) scale(0.95); 
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1); 
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shine {
+    0% { left: -100%; opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { left: 100%; opacity: 0.5; }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #login-modal .modal-content {
+        width: 95%;
+        margin: 0 10px;
+        padding: 1.5rem;
+    }
+    
+    #login-modal .tab {
+        font-size: 0.9rem;
+        padding: 0.75rem 0;
+    }
+    
+    #landing-login-form input {
+        padding: 0.75rem 1rem;
+    }
+    
+    #landing-login-form button[type="submit"] {
+        padding: 0.75rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #login-modal .modal-content {
+        padding: 1.25rem;
+    }
+    
+    #close-modal-btn {
+        padding: 6px;
+        font-size: 1.25rem;
+    }
+}
+
+#login-modal .modal-content {
+    position: relative;
+    z-index: 1;
+}
+
+#close-login-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+#close-login-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+    color: #ffffff;
+}
+
+#login-modal h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+}
+
+.tech-glow {
+    filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.6));
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.6)); }
+    50% { filter: drop-shadow(0 0 25px rgba(138, 43, 226, 0.8)); }
+}
+
+/* 身份选择切换样式增强 */
+.identity-tabs {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.identity-tabs .tab {
+    position: relative;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.identity-tabs .tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8A2BE2, transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.identity-tabs .tab.active {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.identity-tabs .tab.active::after {
+    transform: scaleX(1);
+}
+
+.identity-tabs .tab:hover:not(.active) {
+    background: rgba(138, 43, 226, 0.1);
+    color: #e9d5ff;
+}
+
+/* 登录表单输入框样式 */
+#login-form input {
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    background: rgba(30, 41, 59, 0.7);
+}
+
+#login-form input:focus {
+    border-color: #8A2BE2;
+    box-shadow: 
+        0 0 0 3px rgba(138, 43, 226, 0.2),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+#login-form input::placeholder {
+    color: #64748B;
+    transition: color 0.3s ease;
+}
+
+#login-form input:focus::placeholder {
+    color: #94A3B8;
+}
+
+/* 登录按钮样式增强 */
+#login-form button[type="submit"] {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: linear-gradient(135deg, #8A2BE2 0%, #6A1B9A 100%);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    transition: all 0.3s ease;
+}
+
+#login-form button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+    z-index: -1;
+}
+
+#login-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+}
+
+#login-form button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* 链接样式 */
+#login-form a {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#login-form a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+#login-form a:hover::after {
+    transform: scaleX(1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #login-modal > div {
+        width: 95%;
+        margin: 0 10px;
+    }
+    
+    .identity-tabs .tab {
+        font-size: 0.9rem;
+    }
+}

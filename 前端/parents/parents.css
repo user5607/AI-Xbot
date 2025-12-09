@@ -1,0 +1,61 @@
+/* Tailwind 自定义配置样式 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义工具类 */
+@layer utilities {
+    .content-auto {
+        content-visibility: auto;
+    }
+    .card-shadow {
+        box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.1), 0 8px 10px -6px rgba(147, 51, 234, 0.1);
+    }
+    .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* 自定义动画 */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 标签页样式 */
+.nav-tab.active {
+    background-color: #9333ea;
+    color: white;
+}
+
+.nav-tab:not(.active):hover {
+    background-color: #f3e8ff;
+}
+
+/* 设备使用限制开关样式 */
+#useLimitToggle:checked + span {
+    background-color: #9333ea;
+}
+
+#useLimitToggle:checked + span:before {
+    transform: translateX(100%);
+}
+
+/* 响应式设计优化 */
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

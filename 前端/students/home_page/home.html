@@ -1,0 +1,174 @@
+<!-- 首页界面 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>首页</title>
+        <!-- 引入外部资源 -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- 引入内部资源 -->
+        <link rel="stylesheet" href="home.css">
+        <script src="home.js" defer></script>
+    </head>
+    <body class="bg-[#1E293B] flex flex-col text-white">
+        <!-- 首页界面 -->
+        <div id="home-page" class="flex-1 flex flex-col">
+            <!-- 紫色渐变背景 -->
+            <div class="bg-gradient-to-r from-purple-800 to-blue-900 flex-1 flex flex-col items-center justify-start text-center p-6 relative min-h-screen">
+                <!-- 主内容 -->
+                <div class="relative z-10 max-w-4xl mx-auto pt-10 pb-20">
+                    
+                    <!-- 可爱小机器人背景 -->
+                    <div class="robot-background">
+                        <!-- 粉色圆形小机器人 -->
+                        <div class="robot robot-1">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="40" fill="#ffb6c1"/>
+                                <!-- 腮红 -->
+                                <circle cx="30" cy="45" r="8" fill="#ff69b4" opacity="0.5"/>
+                                <circle cx="70" cy="45" r="8" fill="#ff69b4" opacity="0.5"/>
+                                <!-- 眼睛 -->
+                                <circle cx="40" cy="40" r="5" class="robot-eye"/>
+                                <circle cx="60" cy="40" r="5" class="robot-eye"/>
+                                <!-- 微笑嘴巴 -->
+                                <path d="M40 60 Q50 70 60 60" stroke="#333" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        
+                        <!-- 蓝色方形小机器人 -->
+                        <div class="robot robot-2">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="10" width="80" height="80" rx="10" fill="#87ceeb"/>
+                                <!-- 星星眼睛 -->
+                                <path d="M35 40 l2 7 l7 0 l-6 4 l2 7 l-7-4 l-7 4 l2-7 l-6-4 l7 0 z" fill="#ffd700" class="robot-eye"/>
+                                <path d="M65 40 l2 7 l7 0 l-6 4 l2 7 l-7-4 l-7 4 l2-7 l-6-4 l7 0 z" fill="#ffd700" class="robot-eye"/>
+                                <!-- 小嘴巴 -->
+                                <circle cx="50" cy="65" r="5" fill="#333"/>
+                            </svg>
+                        </div>
+                        
+                        <!-- 黄色三角形小机器人 -->
+                        <div class="robot robot-3">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="50,10 10,80 90,80" fill="#ffd700"/>
+                                <!-- 惊讶眼睛 -->
+                                <circle cx="35" cy="40" r="8" class="robot-eye"/>
+                                <circle cx="65" cy="40" r="8" class="robot-eye"/>
+                                <!-- O形嘴巴 -->
+                                <circle cx="50" cy="60" r="10" fill="none" stroke="#333" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <!-- 绿色椭圆形小机器人 -->
+                        <div class="robot robot-4">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <ellipse cx="50" cy="50" rx="40" ry="50" fill="#98fb98"/>
+                                <!-- 闭眼睛 -->
+                                <path d="M35 40 Q40 45 45 40" stroke="#333" stroke-width="3" fill="none" class="robot-eye"/>
+                                <path d="M55 40 Q60 45 65 40" stroke="#333" stroke-width="3" fill="none" class="robot-eye"/>
+                                <!-- 爱心嘴巴 -->
+                                <path d="M40 60 C40 50 60 50 60 60 C60 70 40 70 40 60" fill="#ff69b4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Logo/图标 - 增强效果 -->
+                    <div class="mb-8 flex justify-center">
+                        <img src="../../assets/logo.png" alt="AI XBot Logo" class="w-24 h-24 object-contain tech-glow">
+                    </div>
+                    
+                    <!-- 标题部分 - 使用艺术字体 -->
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white tech-title">AI XBot</h1>
+                    <h2 class="text-xl md:text-2xl text-purple-200 mb-6 font-medium tech-subtitle">可视化编程学习平台</h2>
+                    
+                    <!-- 描述文本 -->
+                    <p class="text-lg text-purple-100 mb-10 max-w-2xl mx-auto">
+                        拖拽积木即可编程，无需担心语法错误，专注逻辑思维培养。适合编程初学者，从零基础到代码高手的完整学习路径。
+                    </p>
+                    
+                    <!-- 主要按钮区域 -->
+                    <div class="flex flex-wrap justify-center gap-4 mb-16">
+                        <button id="start-programming-btn" class="bg-white text-purple-700 hover:bg-purple-100 py-3 px-8 rounded-lg text-lg font-medium transition-all transform hover:scale-105 shadow-lg">
+                            开始学习 →
+                        </button>
+                    </div>
+                </div>
+                <!-- 核心特性 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-20">
+                    <!-- 特性卡片 1 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/15 transition-colors">
+                        <div class="bg-purple-500/30 rounded-full w-14 h-14 flex items-center justify-center mb-4 mx-auto">
+                            <i class="fa fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">教育友好</h3>
+                        <p class="text-purple-100">专为学习者设计的界面，简单直观的操作方式，循序渐进的学习体验。</p>
+                    </div>
+                    
+                    <!-- 特性卡片 2 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/15 transition-colors">
+                        <div class="bg-blue-500/30 rounded-full w-14 h-14 flex items-center justify-center mb-4 mx-auto">
+                            <i class="fa fa-th-large text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">可视化编程</h3>
+                        <p class="text-purple-100">通过拖拽积木块进行编程，降低学习门槛，培养编程思维和创造力。</p>
+                    </div>
+                    
+                    <!-- 特性卡片 3 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/15 transition-colors">
+                        <div class="bg-green-500/30 rounded-full w-14 h-14 flex items-center justify-center mb-4 mx-auto">
+                            <i class="fa fa-bolt text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">即时反馈</h3>
+                        <p class="text-purple-100">代码编写完成后立即执行，实时看到效果，快速迭代优化学习内容。</p>
+                    </div>
+                </div>                
+                <!-- 优势点 -->
+                <div class="pt-10 border-t border-white/20">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4 text-white">为什么选择我们的编程平台？</h2>
+                        <p class="text-purple-100 max-w-2xl mx-auto">专为青少年和编程初学者设计，让学习编程变得轻松愉快</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- 优势点 1 -->
+                        <div class="text-center">
+                            <div class="bg-purple-900/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-rocket text-3xl text-purple-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">快速入门</h3>
+                            <p class="text-purple-200">无需任何编程基础，即刻开始你的编程之旅</p>
+                        </div>
+
+                        <!-- 优势点 2 -->
+                        <div class="text-center">
+                            <div class="bg-blue-900/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+                                <i class="fa fa-cogs text-3xl text-blue-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">机器人控制</h3>
+                            <p class="text-purple-200">通过编程控制真实机器人，体验科技的魅力</p>
+                        </div>
+                        
+                        <!-- 优势点 3 -->
+                        <div class="text-center">
+                            <div class="bg-green-900/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-code text-3xl text-green-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">代码生成</h3>
+                            <p class="text-purple-200">自动生成专业代码，直观了解编程原理</p>
+                        </div>
+                        
+                        <!-- 优势点 4 -->
+                        <div class="text-center">
+                            <div class="bg-yellow-900/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-trophy text-3xl text-yellow-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-white">挑战任务</h3>
+                            <p class="text-purple-200">丰富的挑战任务，激发学习兴趣和创造力</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

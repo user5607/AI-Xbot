@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>AI XBot 机器人图形化编程平台 - 学生端</title>
+        <!-- 引用外部资源 -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        
+        <!-- 引入用户相关JavaScript -->
+        <script src="students.js" defer></script>
+        
+        <!-- 引入样式文件 -->
+        <link href="students.css" rel="stylesheet">
+
+        <style>
+            /* 确保导航栏固定显示 */
+            #common-header {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                background-color: #0F172A;
+            }
+            /* 确保内容区域有足够空间 */
+            .content-area {
+                width: 100%;
+                min-height: calc(100vh - 64px); /* 减去导航栏高度 */
+                height: auto;
+                overflow: visible;
+            }
+            /* 设置iframe样式 */
+            #page-iframe {
+                width: 100%;
+                min-height: calc(100vh - 64px); /* 与内容区域相同高度 */
+                height: 1000px;
+                border: none;
+                background-color: #1E293B;
+                display: block;
+            }
+            
+            /* 确保body没有边距 */
+            body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+            
+            /* 确保模态框默认隐藏 - 加强优先级 */
+            .hidden {
+                display: none !important;
+            }
+            
+            /* 确保按钮可点击 */
+            button {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    
+    <body class="bg-[#1E293B] flex flex-col text-white min-h-screen">
+        <!-- 从common.html加载导航栏和模态框 -->
+        <div id="common-header">
+            <!-- 顶部导航栏 -->
+            <div class="bg-[#0F172A] text-white shadow-md px-6 py-3 flex items-center justify-between border-b border-[#334155]">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold nav-title">AI XBot 机器人教育平台</span>
+                </div>
+                
+                <!-- 导航链接 - 使用#作为链接，通过JS处理跳转 -->
+                <div class="flex items-center space-x-8">
+                    <a href="#home" id="home-link" class="text-blue-400 font-medium border-b-2 border-blue-400 pb-1">首页</a>
+                    <a href="#platform" id="platform-link" class="text-white hover:text-blue-400 transition-colors">编程平台</a>
+                    <a href="#learn" id="learn-link" class="text-white hover:text-blue-400 transition-colors">学习中心</a>
+                    <a href="#challenge" id="challenge-link" class="text-white hover:text-blue-400 transition-colors">挑战任务</a>
+                </div>
+                
+                <!-- 右侧功能按钮 -->
+                <div class="flex items-center space-x-4">
+                    <button id="notification-btn" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fa fa-bell-o text-xl"></i>
+                    </button>
+                    <button id="settings-btn" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fa fa-cog text-xl"></i>
+                    </button>
+                    <button id="user-menu-btn" class="bg-gray-700 text-white px-3 py-1 rounded-full text-sm flex items-center hover:bg-gray-600 transition-colors">
+                        <i class="fa fa-user-circle-o mr-1"></i> <span id="user-name">学生</span>
+                        <i class="fa fa-angle-down ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 用户菜单模态框 -->
+            <div id="user-menu-modal" class="fixed inset-0 z-50 flex items-center justify-center modal-backdrop hidden">
+                <div>
+                    <div class="modal-content bg-[#0F172A] rounded-2xl p-6 w-80 border border-[#334155] shadow-2xl">
+                        <button id="close-user-menu-btn" class="close-btn absolute top-4 right-4 text-gray-400 hover:text-white text-xl transition-colors">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        
+                        <div class="text-center mb-6">
+                            <div class="bg-purple-500/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                <i class="fa fa-user-o text-2xl text-purple-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">学生用户</h3>
+                            <p class="text-purple-300 text-sm">初级学习者</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-2 mb-6 text-center">
+                            <div>
+                                <p class="text-2xl font-bold text-blue-400">0</p>
+                                <p class="text-sm text-gray-400">完成项目</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-green-400">0</p>
+                                <p class="text-sm text-gray-400">获得成就</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-yellow-400">0</p>
+                                <p class="text-sm text-gray-400">学习小时</p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-2">
+                            <button class="w-full flex items-center px-4 py-3 hover:bg-[#334155] rounded-lg transition-colors">
+                                <i class="fa fa-user-o w-6 text-blue-400"></i>
+                                <span class="ml-3 text-white">个人信息</span>
+                                <i class="fa fa-angle-right ml-auto text-gray-400"></i>
+                            </button>
+                            <button class="w-full flex items-center px-4 py-3 hover:bg-[#334155] rounded-lg transition-colors">
+                                <i class="fa fa-book-o w-6 text-green-400"></i>
+                                <span class="ml-3 text-white">学习记录</span>
+                                <i class="fa fa-angle-right ml-auto text-gray-400"></i>
+                            </button>
+                            <button class="w-full flex items-center px-4 py-3 hover:bg-[#334155] rounded-lg transition-colors">
+                                <i class="fa fa-cog w-6 text-yellow-400"></i>
+                                <span class="ml-3 text-white">账号设置</span>
+                                <i class="fa fa-angle-right ml-auto text-gray-400"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="p-4 border-t border-[#334155]">
+                            <button id="logout-btn" class="w-full flex items-center justify-center px-4 py-3 bg-red-900/30 hover:bg-red-900/40 text-red-400 rounded-lg transition-colors">
+                                <i class="fa fa-sign-out mr-2"></i>
+                                <span>退出登录</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 页面内容容器 - 使用iframe -->
+        <div class="flex-1 content-area">
+            <iframe id="page-iframe" src="home_page/home.html" title="平台内容" scrolling="auto"></iframe>
+        </div>
+        
+        <script>
+            // 确保页面加载完成后再执行代码
+            document.addEventListener('DOMContentLoaded', function() {
+                // 页面导航逻辑
+                function initPageNavigation() {
+                    // 页面映射关系
+                    const pageMap = {
+                        'home': 'home_page/home.html',
+                        'platform': 'platform_page/platform.html',
+                        'learn': 'learn_page/learn.html',
+                        'challenge': 'challenge_page/challenge.html'
+                    };
+                    
+                    // 获取导航链接
+                    const navLinks = document.querySelectorAll('#home-link, #platform-link, #learn-link, #challenge-link');
+                    const iframe = document.getElementById('page-iframe');
+                    
+                    // 为导航链接添加点击事件
+                    navLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const pageId = this.id.split('-')[0];
+                            const pageUrl = pageMap[pageId];
+                            
+                            // 正常导航，不再检查登录状态
+                            if (pageUrl) {
+                                iframe.src = pageUrl;
+                                updateNavigationActiveState(pageId);
+                                iframe.style.height = '1000px';
+                            }
+                        });
+                    });
+                    
+                    // 监听iframe内容加载完成，尝试自动调整高度
+                    iframe.addEventListener('load', function() {
+                        try {
+                            if (iframe.contentWindow && iframe.contentWindow.document.body) {
+                                const contentHeight = iframe.contentWindow.document.body.scrollHeight;
+                                iframe.style.height = Math.max(contentHeight, 800) + 'px';
+                            }
+                        } catch (e) {
+                            console.log('无法自动调整iframe高度:', e);
+                        }
+                    });
+                }
+                
+                // 更新导航激活状态
+                function updateNavigationActiveState(activePageId) {
+                    const navLinks = ['home', 'platform', 'learn', 'challenge'];
+                    
+                    navLinks.forEach(pageId => {
+                        const link = document.getElementById(`${pageId}-link`);
+                        if (pageId === activePageId) {
+                            link.classList.add('text-blue-400', 'font-medium', 'border-b-2', 'border-blue-400', 'pb-1');
+                            link.classList.remove('text-white');
+                        } else {
+                            link.classList.remove('text-blue-400', 'font-medium', 'border-b-2', 'border-blue-400', 'pb-1');
+                            link.classList.add('text-white');
+                        }
+                    });
+                }
+                
+                // 添加右侧功能按钮的点击事件
+                function initSideButtons() {
+                    const notificationBtn = document.getElementById('notification-btn');
+                    const settingsBtn = document.getElementById('settings-btn');
+                }
+                
+                // 主初始化函数
+                function initApp() {
+                    initPageNavigation();
+                    initSideButtons();
+                    
+                    // 调用students.js中的初始化函数
+                    if (window.userFunctions && typeof window.userFunctions.initUserFunctions === 'function') {
+                        window.userFunctions.initUserFunctions();
+                    }
+                    
+                    // 初始化时检查登录状态并更新用户名
+                    if (window.userFunctions && window.userFunctions.isUserLoggedIn()) {
+                        const userInfo = window.userFunctions.getUserLoginState();
+                        const userNameElement = document.getElementById('user-name');
+                        if (userNameElement && userInfo) {
+                            userNameElement.textContent = userInfo.name || userInfo.username || '用户';
+                        }
+                    }
+                }
+                
+                // 初始化应用
+                initApp();
+                
+                // 窗口大小改变时重新调整iframe高度
+                window.addEventListener('resize', function() {
+                    const iframe = document.getElementById('page-iframe');
+                    try {
+                        if (iframe.contentWindow && iframe.contentWindow.document.body) {
+                            const contentHeight = iframe.contentWindow.document.body.scrollHeight;
+                            iframe.style.height = Math.max(contentHeight, 800) + 'px';
+                        }
+                    } catch (e) {
+                        console.log('调整iframe高度失败:', e);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

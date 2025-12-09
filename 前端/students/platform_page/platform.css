@@ -1,0 +1,2139 @@
+/* 基础样式重置 */
+/* 头部样式 - 炫酷科技感 */
+header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: #4ade80;
+    padding: 0.8rem;
+    box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3), 0 0 30px rgba(74, 222, 128, 0.1);
+    position: relative;
+    border-bottom: 2px solid #4ade80;
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* 科技感网格背景 */
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(rgba(74, 222, 128, 0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(74, 222, 128, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: -1px -1px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 发光扫描线效果 */
+header::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.3), transparent);
+    animation: scan 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes scan {
+    0% { top: -100%; }
+    50% { top: 200%; }
+    100% { top: -100%; }
+}
+
+/* 科技感标题 */
+header h1 {
+    margin-bottom: 0.4rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    /* 霓虹灯效果 */
+    text-shadow: 
+        0 0 5px #4ade80,
+        0 0 10px #4ade80,
+        0 0 20px #4ade80,
+        0 0 40px #4ade80,
+        0 0 80px #4ade80;
+    font-family: 'Orbitron', 'Arial', sans-serif;
+    letter-spacing: 2px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'Comic Sans MS', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+    background-image: 
+        linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
+    background-size: 30px 30px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* 添加教室墙面纹理 */
+    background-color: #f8fafc;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5-5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    position: relative;
+}
+
+/* 头部样式 - 课堂科技风格 */
+header {
+    background: linear-gradient(135deg, #1a56db, #3b82f6);
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    border-bottom: 3px solid #0f172a;
+    z-index: 10;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+background: linear-gradient(90deg, transparent, #fef3c7, transparent);
+    border-radius: 2px;
+}
+
+/* 科技感装饰线条 */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.2) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+}
+
+/* 课堂时钟装饰 */
+.classroom-clock {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    border: 3px solid #1e3a8a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #1e3a8a;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.classroom-clock::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background-color: #1e3a8a;
+    transform-origin: bottom center;
+    transform: rotate(30deg);
+}
+
+.classroom-clock::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background-color: #ef4444;
+    transform-origin: bottom center;
+    transform: rotate(120deg);
+}
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.toolbar button {
+    padding: 0.6rem 1.2rem;
+    background-color: white;
+    color: #1e40af;
+    border: 2px solid #93c5fd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
+}
+
+.toolbar button:hover {
+    background-color: #dbeafe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+    border-color: #60a5fa;
+}
+
+.dropbtn {
+    padding: 0.6rem 1.2rem;
+    background-color: white;
+    color: #1e40af;
+    border: 2px solid #93c5fd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px 0px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    overflow: hidden;
+    animation: dropdownFade 0.3s ease-out;
+    border: 1px solid #e2e8f0;
+}
+
+@keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #f8fafc;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #dbeafe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+    border-color: #60a5fa;
+}
+
+#currentProject {
+    color: #fef3c7;
+    font-weight: bold;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 主内容区域优化 */
+main {
+    display: flex;
+    flex: 1;
+    padding: 1rem;
+    gap: 1rem;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 可拖动分隔条样式 */
+.resizer {
+    height: 6px;
+    background-color: #cbd5e1;
+    cursor: row-resize;
+    position: relative;
+    transition: background-color 0.2s ease;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* 分隔条悬停效果 */
+.resizer:hover {
+    background-color: #60a5fa;
+}
+
+/* 分隔条调整图标 */
+.resizer::before {
+    content: "⋮⋮";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0.7;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.resizer:hover::before {
+    color: #1d4ed8;
+    opacity: 1;
+}
+
+/* 底部日志输出 - 调整高度和内边距 */
+.console {
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    padding: 0.8rem;
+    margin: 0;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    height: 25%; /* 使用固定高度替代max-height */
+    display: flex;
+    flex-direction: column;
+    border-top: 3px solid #cbd5e1;
+    background: linear-gradient(to right, #f8fafc 0%, #ffffff 100%);
+    min-height: 120px; /* 最小高度限制 */
+}
+
+/* 页面整体高度控制 */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 使用固定高度而不是min-height和max-height */
+    overflow: hidden;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7 3.134-7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5-5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    position: relative;
+}
+
+/* 头部样式 - 减小内边距 */
+header {
+    background: linear-gradient(135deg, #1a56db, #3b82f6);
+    color: white;
+    padding: 0.8rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    border-bottom: 3px solid #0f172a;
+    z-index: 10;
+}
+
+header h1 {
+    margin-bottom: 0.4rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 工具栏样式 - 减小按钮尺寸 */
+.toolbar button,
+.dropbtn {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: #1e40af;
+    border: 2px solid #93c5fd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: inherit;
+}
+
+/* 运行控制按钮 - 减小尺寸 */
+#playButton, #pauseButton, #stopButton {
+    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
+    width: 100%;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+}
+
+/* 响应式设计优化 */
+@media (max-width: 1024px) {
+    .control-panel {
+        width: 240px; /* 进一步减小 */
+    }
+.blockly-container {
+        flex: 2;
+    }
+    
+    header h1 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        padding: 0.8rem;
+        gap: 1rem;
+    }
+    
+    .control-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 0.8rem;
+        gap: 0.8rem;
+    }
+    
+.panel-section {
+        min-width: 240px;
+        padding: 1rem;
+        transform: none;
+    }
+    
+    .log-output {
+        height: 100px;
+        margin-left: 20px;
+    }
+}
+
+/* 科技背景装饰 */
+main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.05) 0%, transparent 20%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 公告板装饰 - 修改便利贴颜色 */
+.bulletin-board {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 120px;
+    height: 150px;
+    background-color: #dbeafe; /* 蓝色便利贴 */
+    border: 2px solid #3b82f6;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: rotate(-3deg);
+    z-index: 10;
+}
+
+.bulletin-board h4 {
+    color: #1e40af;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 8px;
+    text-decoration: underline;
+}
+
+.bulletin-board p {
+    color: #1e3a8a;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-family: 'Comic Sans MS', cursive;
+    margin-bottom: 4px;
+}
+
+/* 修改胶带/别针颜色 */
+.bulletin-pin {
+    position: absolute;
+    top: -8px;
+    width: 16px;
+    height: 16px;
+    background-color: #8b5cf6; /* 紫色别针 */
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.bulletin-pin::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 8px;
+    background-color: #6d28d9;
+}
+
+.bulletin-pin:nth-child(1) { left: 20%; }
+.bulletin-pin:nth-child(2) { left: 50%; }
+.bulletin-pin:nth-child(3) { left: 80%; }
+
+/* Blockly工作区 - 黑板样式 */
+.blockly-container {
+    flex: 3; /* 占据3/4宽度 */
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: #1e293b;
+    border-radius: 2px;
+    /* 黑板边框 - 移除倾斜 */
+    border: 8px solid #0f172a;
+    border-radius: 10px;
+    position: relative;
+    /* 移除旋转倾斜效果 */
+    transform: none;
+}
+
+/* 黑板装饰边框 */
+.blockly-container::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border: 2px solid #475569;
+    border-radius: 15px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 黑板木纹效果 */
+.blockly-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7 3.134-7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5-5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 粉笔效果 - 左上角粉笔 */
+.blockly-container .chalk-1 {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 15px;
+    height: 70px;
+    background: #f1f5f9;
+    border-radius: 3px 3px 0 0;
+    transform: rotate(-10deg);
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.blockly-container .chalk-1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 10px;
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+/* 粉笔效果 - 右上角彩色粉笔 */
+.blockly-container .chalk-2 {
+    position: absolute;
+    top: -5px;
+right: 40px;
+    width: 15px;
+    height: 60px;
+    background: #ef4444;
+    border-radius: 3px 3px 0 0;
+    transform: rotate(5deg);
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.blockly-container .chalk-2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 10px;
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+/* 粉笔效果 - 右下角彩色粉笔 */
+.blockly-container .chalk-3 {
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    width: 15px;
+    height: 70px;
+    background: #10b981;
+    border-radius: 3px 3px 0 0;
+    transform: rotate(15deg);
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.blockly-container .chalk-3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 10px;
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+/* 额外的粉笔效果 - 左下角蓝色粉笔 */
+.blockly-container .chalk-4 {
+    position: absolute;
+    bottom: -5px;
+    left: 40px;
+    width: 15px;
+    height: 60px;
+    background: #3b82f6;
+    border-radius: 3px 3px 0 0;
+    transform: rotate(-5deg);
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.blockly-container .chalk-4::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 10px;
+    background: #6b7280;
+    border-radius: 3px;
+}
+
+/* 中间放置的粉笔画笔盒 */
+.chalk-box {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 40px;
+    background-color: #78350f;
+    border: 2px solid #92400e;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 5px;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.chalk-stick {
+    width: 8px;
+    height: 25px;
+    border-radius: 2px 2px 0 0;
+}
+
+.chalk-stick:nth-child(1) { background-color: #f1f5f9; }
+.chalk-stick:nth-child(2) { background-color: #ef4444; }
+.chalk-stick:nth-child(3) { background-color: #3b82f6; }
+.chalk-stick:nth-child(4) { background-color: #10b981; }
+.chalk-stick:nth-child(5) { background-color: #f59e0b; }
+
+/* 黑板上的粉笔记号 */
+.chalk-marks {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.chalk-mark {
+    position: absolute;
+    background-color: rgba(241, 245, 249, 0.1);
+    border-radius: 50%;
+}
+
+.chalk-mark:nth-child(1) { width: 20px; height: 20px; top: 20%; left: 10%; }
+.chalk-mark:nth-child(2) { width: 15px; height: 15px; top: 40%; left: 85%; }
+.chalk-mark:nth-child(3) { width: 25px; height: 25px; top: 70%; left: 15%; }
+.chalk-mark:nth-child(4) { width: 18px; height: 18px; top: 30%; left: 80%; }
+
+/* 右侧控制面板 - 调整宽度增加空间 */
+.control-panel {
+    width: 280px; /* 增加控制面板宽度，提供更多显示空间 */
+    display: flex;
+flex-direction: column;
+    gap: 1.2rem; /* 适度调整间距 */
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* 便利贴公共样式 - 移除默认背景色，让每个面板使用自己的颜色 */
+.panel-section {
+    /* 移除这里的background-color，改为由下面的特定选择器设置 */
+    padding: 1rem;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    overflow: visible;
+    transform: none;
+    min-height: auto;
+}
+
+/* 第一个面板 - 当前项目 - 使用黄色便利贴风格 */
+.panel-section:nth-child(1) {
+    background-color: #fff9c4;
+}
+
+/* 第二个面板 - 运行控制 - 使用蓝色便利贴风格 */
+.panel-section:nth-child(2) {
+    background-color: #dbeafe;
+}
+
+/* 第三个面板 - 机器人状态 - 使用绿色便利贴风格 */
+.panel-section:nth-child(3) {
+    background-color: #d1fae5;
+}
+
+/* 第三个面板 - 机器人状态 - 使用绿色便利贴风格 */
+.panel-section:nth-child(4) {
+    background-color: #f0d1fa;
+}
+/* 根据面板颜色调整装饰折角的颜色 */
+.panel-section:nth-child(1)::before {
+    border-color: #fff5d6 #fff5d6 #fff9c4 #fff9c4;
+}
+
+.panel-section:nth-child(2)::before {
+    border-color: #e6f3ff #e6f3ff #dbeafe #dbeafe;
+}
+
+.panel-section:nth-child(3)::before {
+    border-color: #e6f7ef #e6f7ef #d1fae5 #d1fae5;
+}
+
+.panel-section:nth-child(4)::before {
+    border-color: #f4e6f7 #f4e6f7 #f0d1fa #f0d1fa;
+}
+
+/* 标题栏样式优化 */
+.panel-section h3 {
+    margin-bottom: 0.8rem; /* 减小底部间距 */
+    color: #1e293b;
+    font-size: 1.1rem; /* 适当调整字体大小 */
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* 减小图标与文字间距 */
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 1;
+    word-break: break-word; /* 允许标题换行，避免溢出 */
+}
+
+/* 面板内容样式优化 */
+.panel-section p {
+    color: #374151;
+    margin-bottom: 0.6rem; /* 减小段落间距 */
+    font-size: 0.9rem; /* 适度调整字体大小 */
+    line-height: 1.4; /* 调整行高，使内容更紧凑 */
+    position: relative;
+    z-index: 1;
+word-break: break-word; /* 确保长文本能够换行 */
+}
+
+/* 便利贴装饰元素调整 */
+.panel-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 25px 25px 0; /* 减小折角大小，避免遮挡内容 */
+border-style: solid;
+    border-color: #f5f5f5 #f5f5f5 #ccc #ccc;
+    box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 装饰胶带调整 */
+.panel-section::after {
+    content: '';
+    position: absolute;
+    top: -8px; /* 调整位置 */
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    width: 70px; /* 减小宽度 */
+    height: 25px; /* 减小高度 */
+    background-color: rgba(255, 255, 255, 0.6);
+    opacity: 0.8;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+
+.panel-section h3 {
+    margin-bottom: 1rem;
+    color: #1e293b;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 1;
+}
+
+.panel-section p {
+    color: #374151;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+}
+
+/* 进度条样式 */
+.progress-container {
+    width: 100%;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    margin-top: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.progress-container #progressBar {
+    height: 100%;
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    width: 0%;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+.progress-container #progressBar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.3) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.3) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 20px 20px;
+    animation: progressAnimation 1s linear infinite;
+}
+
+@keyframes progressAnimation {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 20px; }
+}
+
+/* 运行控制按钮 - 显著缩小尺寸 */
+#playButton, #stopButton {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.7rem !important;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px; /* 减小图标与文字间距 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 6px; /* 减小按钮间距 */
+    width: 100%;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+}
+
+/* 单独调整运行按钮 */
+#playButton {
+    background-color: #10b981;
+    color: white;
+    border-bottom: 2px solid #059669; /* 减小下边框宽度 */
+}
+
+/* 单独调整停止按钮 */
+#stopButton {
+    background-color: #ef4444;
+    color: white;
+    border-bottom: 2px solid #dc2626; /* 减小下边框宽度 */
+}
+
+/* 悬停效果也相应调整 */
+#playButton:hover, #stopButton:hover {
+    transform: translateY(-1px); /* 减小悬停时的上移距离 */
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 删除以下重复的原始样式代码 */
+/*
+#playButton, #pauseButton, #stopButton {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    width: 100%;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+}
+
+#playButton {
+    background-color: #10b981;
+    color: white;
+    border-bottom: 3px solid #059669;
+}
+
+#playButton:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+*/
+
+#pauseButton {
+    background-color: #f59e0b;
+    color: white;
+    border-bottom: 3px solid #d97706;
+}
+
+#pauseButton:hover {
+    background-color: #d97706;
+    transform: translateY(-2px);
+    box-shadow: 3px 4px 8px rgba(245, 158, 11, 0.3);
+}
+
+#stopButton {
+    background-color: #ef4444;
+    color: white;
+    border-bottom: 3px solid #dc2626;
+}
+#stopButton:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 3px 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* 底部日志输出 - 笔记本样式 */
+.console {
+background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    padding: 0.8rem;
+    margin: 0;
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+    height: 15%; /* 减小初始高度到15% */
+    display: flex;
+    flex-direction: column;
+    border-top: 3px solid #cbd5e1;
+    background: linear-gradient(to right, #f8fafc 0%, #ffffff 100%);
+    min-height: 100px; /* 稍微减小最小高度 */
+}
+/* 笔记本装订线效果 */
+.console::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 100%);
+    border-right: 1px solid #cbd5e1;
+}
+
+/* 装订孔 */
+.console::after {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 20%;
+    width: 4px;
+    height: 20px;
+    background: #64748b;
+    border-radius: 2px;
+    box-shadow: 
+        0 40px 0 #64748b,
+        0 80px 0 #64748b,
+        0 120px 0 #64748b,
+        0 160px 0 #64748b;
+}
+
+.console h3 {
+    margin-bottom: 0.8rem;
+    color: #1e293b;
+    position: relative;
+    z-index: 1;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 30px;
+}
+
+.console h3::before {
+    content: "📝";
+    font-size: 1.3rem;
+}
+
+#clearLogButton {
+    background-color: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+#clearLogButton:hover {
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+/* 日志输出区域 - 增强滚动条功能 */
+.log-output {
+    height: 180px;
+    overflow-y: auto;
+    padding: 1rem 1rem 1rem 2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: #ffffff;
+    position: relative;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex: 1;
+    min-height: 0;
+    margin-left: 30px;
+    /* 以下是增强的滚轮和滚动条样式 */
+    scroll-behavior: smooth; /* 使滚动更加平滑 */
+    -webkit-overflow-scrolling: touch; /* 为移动设备添加惯性滚动 */
+}
+
+/* 自定义滚动条样式 - WebKit浏览器(Chrome, Safari) */
+.log-output::-webkit-scrollbar {
+    width: 10px; /* 滚动条宽度 */
+}
+.log-output::-webkit-scrollbar-track {
+    background: #f1f5f9; /* 滚动条轨道背景色 */
+    border-radius: 5px; /* 轨道圆角 */
+}
+
+.log-output::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* 滚动条滑块颜色 */
+    border-radius: 5px; /* 滑块圆角 */
+    border: 2px solid #f1f5f9; /* 添加边框使滑块看起来更独立 */
+}
+
+.log-output::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* 鼠标悬停时滑块颜色 */
+}
+
+/* 自定义滚动条样式 - Firefox */
+.log-output {
+    scrollbar-width: thin; /* 滚动条宽度：thin, auto, none */
+    scrollbar-color: #cbd5e1 #f1f5f9; /* 滑块颜色和轨道颜色 */
+}
+
+/* 横线背景 */
+.log-output::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(#e2e8f0 1px, transparent 1px);
+    background-size: 100% 26px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.log-entry {
+    position: relative;
+    z-index: 1;
+    padding-left: 10px;
+    margin-bottom: 4px;
+    border-left: 3px solid transparent;
+    animation: logSlideIn 0.3s ease-out;
+}
+
+@keyframes logSlideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.log-info {
+    color: #374151;
+    border-left-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+}
+
+.log-error {
+    color: #dc2626;
+    border-left-color: #dc2626;
+    font-weight: bold;
+    background-color: rgba(220, 38, 38, 0.05);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+}
+
+.log-warning {
+    color: #d97706;
+    border-left-color: #d97706;
+    background-color: rgba(217, 119, 6, 0.05);
+    padding: 4px 8px;
+    border-radius: 0 4px 4px 0;
+}
+
+/* 页面装饰 - 纸张边角 */
+.paper-corner {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: rotate(45deg);
+    z-index: -1;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.paper-corner:nth-child(1) { top: 0; right: 0; margin-top: -40px; margin-right: -40px; }
+.paper-corner:nth-child(2) { bottom: 0; left: 0; margin-bottom: -40px; margin-left: -40px; }
+
+/* 页面装饰 - 便签纸 */
+.sticky-note {
+    position: fixed;
+    background-color: #fef3c7;
+    padding: 15px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    z-index: -1;
+    max-width: 200px;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #78350f;
+    transform: rotate(2deg);
+}
+
+.sticky-note:nth-child(1) {
+    top: 20%;
+    right: 3%;
+}
+
+.sticky-note:nth-child(2) {
+    bottom: 25%;
+    left: 2%;
+    background-color: #e8f5e9;
+    transform: rotate(-1deg);
+}
+
+.sticky-note::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .control-panel {
+        width: 280px;
+    }
+    
+.blockly-container {
+        flex: 2;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .bulletin-board {
+        width: 100px;
+        height: 120px;
+        font-size: 0.7rem;
+    }
+    
+    .classroom-clock {
+        width: 50px;
+        height: 50px;
+        font-size: 0.8rem;
+        right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+    
+    .control-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 1rem;
+        gap: 1rem;
+    }
+    
+    .panel-section {
+        min-width: 260px;
+        padding: 1.2rem;
+        transform: none;
+    }
+    
+    .panel-section:hover {
+        transform: translateY(-5px);
+    }
+    
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .dropdown {
+        width: 100%;
+    }
+    
+    .dropdown-content {
+        width: 100%;
+    }
+    
+    #currentProject {
+        margin-left: 0;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+    
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .log-output {
+        height: 150px;
+        margin-left: 20px;
+    }
+    
+    .console::before {
+        width: 20px;
+    }
+    
+    .console::after {
+        left: 8px;
+        width: 3px;
+        height: 15px;
+        box-shadow: 
+            0 30px 0 #64748b,
+            0 60px 0 #64748b,
+            0 90px 0 #64748b,
+            0 120px 0 #64748b;
+    }
+    
+    .console h3 {
+        margin-left: 20px;
+    }
+    
+    .bulletin-board,
+    .classroom-clock,
+    .sticky-note,
+    .paper-corner {
+        display: none;
+    }
+}
+@media (max-width: 480px) {
+    header {
+        padding: 0.8rem;
+    }
+    
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .control-panel {
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    
+    .panel-section {
+        min-width: unset;
+        width: 100%;
+        padding: 1rem;
+    }
+    
+main {
+        padding: 0.8rem;
+        gap: 0.8rem;
+    }
+    
+    .blockly-container {
+        border-width: 5px;
+    }
+    
+    .chalk-box {
+        display: none;
+    }
+}
+
+/* 按钮样式增强 */
+button {
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Blockly样式覆盖 - 黑板风格 */
+.blocklyToolboxDiv {
+    background-color: #0f172a !important;
+    border-right: 1px solid #334155 !important;
+}
+
+.blocklyTreeRow {
+    height: 40px !important;
+    line-height: 40px !important;
+    color: #e2e8f0 !important;
+}
+
+.blocklyTreeRow:hover {
+    background-color: #334155 !important;
+}
+
+.blocklyTreeSelected {
+    background-color: #475569 !important;
+    color: white !important;
+}
+
+.blocklyWorkspaceBackground { background-color: #1e293b !important; }
+.blocklyMainBackground { background-color: #1e293b !important; }
+.blocklyGridPattern>.blocklyPatternSvg { stroke: rgba(255, 255, 255, 0.1) !important; }
+
+/* 确保垃圾桶图标可见 */
+.blocklyTrashcanOpen {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+    border: 1px solid #fca5a5 !important;
+}
+
+/* 工具栏按钮图标效果 */
+#undoButton::before { content: "↶ "; }
+#redoButton::before { content: "↷ "; }
+#clearButton::before { content: "🗑️ "; }
+#runButton::before { content: "▶️ "; }
+
+/* 滚动条样式美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+    border: 2px solid #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* 添加初始化脚本，动态创建装饰元素 */
+.classroom-decoration {
+    position: fixed;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+/* 初始化函数，添加粉笔装饰 */
+/* 添加编译按钮样式，与运行按钮相同 */
+#compileButton {
+    background-color: #1091b9;
+    color: white;
+    border-bottom: 2px solid #059669;
+    font-size: 0.75rem !important;
+    padding: 0.5rem 0.7rem !important;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+}
+
+#compileButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
+}
+    
+
+
+/* 工作区包装器 - 新增 */
+.workspace-wrapper {
+    flex: 3; /* 占据3/4宽度 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 工作区工具栏样式 - 添加新样式 */
+.workspace-toolbar {
+    display: flex;
+    gap: 8px;
+    padding: 10px 15px;
+    background-color: transparent; /* 去除黑色背景 */
+    border-radius: 8px;
+    border: none; /* 移除边框 */
+    box-shadow: none; /* 移除阴影 */
+}
+
+.workspace-toolbar button {
+    padding: 8px 16px;
+    background-color: #3b82f6; /* 使用明亮的蓝色背景 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3); /* 添加蓝色阴影 */
+}
+
+.workspace-toolbar button:hover {
+    background-color: #2563eb; /* 悬停时使用更深的蓝色 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.workspace-toolbar button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+/* 为不同按钮添加图标标识 */
+#undoButton::before {
+    content: "↶";
+}
+
+#redoButton::before {
+    content: "↷";
+}
+
+#clearButton::before {
+    content: "🗑️";
+}
+
+#generateCodeButton::before {
+    content: "💻";
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .workspace-toolbar {
+        flex-wrap: wrap;
+        padding: 8px;
+        gap: 6px;
+    }
+    
+    .workspace-toolbar button {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* 调整Blockly容器样式 - 修改 */
+.blockly-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    min-height: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: #1e293b;
+    border-radius: 10px;
+    border: 8px solid #0f172a;
+    position: relative;
+    transform: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .workspace-wrapper {
+        flex: 1;
+    }
+    
+    .workspace-toolbar {
+        flex-wrap: wrap;
+        padding: 8px;
+        gap: 6px;
+    }
+    
+    .workspace-toolbar button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    main {
+        flex-direction: column;
+        padding: 0.8rem;
+        gap: 1rem;
+    }
+    
+    .control-panel {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 0.8rem;
+        gap: 0.8rem;
+    }
+}
+
+/* 日志代码显示样式 */
+.log-entry.log-code {
+    background-color: #f8fafc;
+    border-left: 3px solid #3b82f6;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 0 4px 4px 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .workspace-toolbar {
+        flex-wrap: wrap;
+        padding: 8px;
+        gap: 6px;
+    }
+    
+    .workspace-toolbar button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    #blocklyDiv {
+        height: calc(100% - 45px) !important;
+    }
+}
+
+/* 改进后的表单组样式 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+/* 炫酷的下拉框样式 */
+.form-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #1e293b;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+}
+
+/* 鼠标悬停效果 */
+.form-select:hover {
+    border-color: #60a5fa;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    transform: translateY(-1px);
+}
+
+/* 聚焦效果 */
+.form-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+}
+
+/* 选项列表样式 */
+.form-select option {
+    background-color: #ffffff;
+    color: #1e293b;
+    padding: 10px;
+    font-size: 0.95rem;
+}
+
+.form-select option:hover {
+    background-color: #f1f5f9;
+}
+
+/* 禁用状态 */
+.form-select:disabled {
+    background-color: #f8fafc;
+    color: #94a3b8;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    border-color: #e2e8f0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .form-select {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    
+    .form-group label {
+        font-size: 1rem;
+    }
+}
+
+/* 自定义确认对话框容器 - 优化整体外观 */
+.custom-confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 对话框内容 - 优化布局和阴影 */
+.custom-confirm-dialog > div {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+    max-width: 480px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    animation: slideIn 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 添加顶部装饰条 */
+.custom-confirm-dialog > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24, #fcd34d);
+    border-radius: 16px 16px 0 0;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 图标容器 */
+.dialog-icon-container {
+    margin-top: 0.5rem;
+}
+
+/* 警告图标 - 优化样式 */
+.dialog-warning-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 
+        0 6px 16px rgba(245, 158, 11, 0.4),
+        0 0 0 1px rgba(245, 158, 11, 0.2);
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+.dialog-warning-icon::before {
+    content: '!';
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'Arial', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: -2px;
+}
+
+/* 标题样式 - 优化字体 */
+.custom-confirm-dialog h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0f172a;
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'Arial', sans-serif;
+    text-align: center;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+}
+
+/* 修改动态角色容器样式 - 移至标题两侧 */
+.animated-characters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* 角色基础样式 */
+.robot-character {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+/* 左侧机器狗 - 上下弹跳动画，移至左上角 */
+.dog-left {
+    top: 10px;
+    left: 20px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.dog-left::before {
+    content: "🐕"; 
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+}
+
+/* 中左侧机器人 - 挥手和轻微摇摆，移至左中部 */
+.robot-left {
+    top: 50%;
+    left: 120px;
+    transform: translateY(-50%);
+    animation: wave 3s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+.robot-left::before {
+    content: "🤖";
+    font-size: 45px;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+@keyframes wave {
+    0%, 100% { 
+        transform: translateY(-50%) rotate(0deg);
+    }
+    25% { 
+        transform: translateY(-50%) rotate(-10deg);
+    }
+    50% { 
+        transform: translateY(-50%) rotate(10deg);
+    }
+    75% { 
+        transform: translateY(-50%) rotate(-5deg);
+    }
+}
+
+/* 中右侧机器人 - 360度旋转动画，移至右中部 */
+.robot-right {
+    top: 50%;
+    right: 120px;
+    transform: translateY(-50%);
+    animation: rotate 8s linear infinite;
+}
+
+.robot-right::before {
+    content: "🤖";
+    font-size: 40px;
+    position: absolute;
+    top: -20px;
+    right: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+@keyframes rotate {
+    0% { transform: translateY(-50%) rotate(0deg) scale(1); }
+    50% { transform: translateY(-50%) rotate(180deg) scale(1.1); }
+    100% { transform: translateY(-50%) rotate(360deg) scale(1); }
+}
+
+/* 右侧机器狗 - 跑步和摇尾巴，移至右上角 */
+.dog-right {
+    top: 10px;
+    right: 20px;
+    animation: run 2s ease-in-out infinite;
+}
+
+.dog-right::before {
+    content: "🐶";
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+@keyframes run {
+    0%, 100% { 
+        transform: translateX(0) rotate(0deg) scale(1);
+    }
+    25% { 
+        transform: translateX(-15px) rotate(10deg) scale(1.05);
+    }
+    50% { 
+        transform: translateX(0) rotate(0deg) scale(1);
+    }
+    75% { 
+        transform: translateX(15px) rotate(-10deg) scale(1.05);
+    }
+}
+
+/* 恢复标题原始位置，移除之前的调整 */
+header h1 {
+    margin-bottom: 0.4rem;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    margin-top: 0;
+    /* 霓虹灯效果 */
+    text-shadow: 
+        0 0 5px #4ade80,
+        0 0 10px #4ade80,
+        0 0 20px #4ade80,
+        0 0 40px #4ade80,
+        0 0 80px #4ade80;
+    font-family: 'Orbitron', 'Arial', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* 消息样式 - 优化字体 */
+.custom-confirm-dialog p {
+    margin: 0;
+    font-size: 1.15rem;
+    color: #475569;
+    text-align: center;
+    line-height: 1.7;
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'Arial', sans-serif;
+    letter-spacing: 0.2px;
+}
+
+/* 按钮容器 */
+.custom-confirm-dialog > div > div:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+/* 取消按钮 - 优化样式 */
+.custom-confirm-dialog button:first-child {
+    padding: 0.95rem 2.5rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffffff, #f1f5f9);
+    color: #475569;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-width: 120px;
+}
+
+.custom-confirm-dialog button:first-child:hover {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    border-color: #94a3b8;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.custom-confirm-dialog button:first-child:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.custom-confirm-dialog button:first-child::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transition: all 0.4s ease;
+}
+
+.custom-confirm-dialog button:first-child:hover::after {
+    left: 100%;
+}
+
+/* 确定按钮 - 优化样式 */
+.custom-confirm-dialog button:last-child {
+    padding: 0.95rem 2.5rem;
+    border: 2px solid #ef4444;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 6px 16px rgba(239, 68, 68, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-width: 120px;
+}
+
+.custom-confirm-dialog button:last-child::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.4s ease;
+}
+
+.custom-confirm-dialog button:last-child:hover::before {
+    left: 100%;
+}
+
+.custom-confirm-dialog button:last-child:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 20px rgba(239, 68, 68, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: #dc2626;
+}
+
+.custom-confirm-dialog button:last-child:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 4px 12px rgba(239, 68, 68, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 按钮聚焦效果 */
+.custom-confirm-dialog button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .block-count-highlight {
+        font-size: 1.3em;
+        padding: 0.15em 0.5em;
+    }
+}

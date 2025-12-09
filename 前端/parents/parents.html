@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家长端 - AI XBot 教育平台</title>
+    <!-- 外部资源 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <!-- 自定义资源 -->
+    <link rel="stylesheet" href="parents.css">
+    <script src="parents.js"></script>
+
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        purple: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                            950: '#3b0764',
+                        },
+                        primary: '#9333ea',
+                        secondary: '#c084fc',
+                        accent: '#d8b4fe',
+                        dark: '#1e1b4b',
+                        light: '#f3e8ff',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto { content-visibility: auto; }
+            .text-shadow { text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+            .scrollbar-hide::-webkit-scrollbar { display: none; }
+            .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+            .card-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans flex flex-col">
+    <!-- 顶部导航栏 - 保留logo和用户信息 -->
+    <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="../assets/logo.png" alt="AI XBot 教育平台" class="w-10 h-10 object-contain">
+                <h1 class="text-xl font-bold text-purple-800">AI XBot 教育平台 - 家长端</h1>
+            </div>
+            
+            <!-- 用户信息和通知 -->
+            <!-- 用户信息和通知 -->
+            <div class="flex items-center gap-6">
+                <div class="relative">
+                    <button class="relative p-2 text-gray-600 hover:text-purple-600 transition-colors">
+                        <i class="fa fa-bell text-xl"></i>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                    </button>
+                </div>
+                
+                <div class="relative">
+                    <button id="userMenuButton" class="flex items-center gap-2 p-1 rounded-full hover:bg-gray-100 transition-colors">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <span class="hidden md:inline-block font-medium text-gray-700">张妈妈</span>
+                        <i class="fa fa-angle-down text-gray-500"></i>
+                    </button>
+                    
+                    <!-- 下拉菜单 -->
+                    <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20 hidden transition-all duration-200">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
+                            <i class="fa fa-user-circle mr-2"></i>个人信息
+                        </a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors">
+                            <i class="fa fa-cog mr-2"></i>账户设置
+                        </a>
+                        <div class="border-t border-gray-100 my-1"></div>
+                        <a href="#" class="block px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
+                            <i class="fa fa-sign-out mr-2"></i>退出登录
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="flex pt-16 min-h-screen">
+        <!-- 侧边导航栏 -->
+        <aside class="w-64 bg-white shadow-md fixed left-0 top-16 bottom-0 overflow-y-auto transition-all duration-300 z-40">
+            <nav class="py-4">
+                <ul class="space-y-1 px-3">
+                    <li>
+                        <button class="nav-tab active w-full flex items-center py-3 px-4 rounded-md bg-purple-600 text-white font-medium transition-all duration-200" data-tab="learning">
+                            <i class="fa fa-graduation-cap w-6 text-center"></i>
+                            <span class="ml-3">学习动态</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-tab w-full flex items-center py-3 px-4 rounded-md text-gray-600 font-medium hover:bg-purple-50 transition-all duration-200" data-tab="communication">
+                            <i class="fa fa-comments w-6 text-center"></i>
+                            <span class="ml-3">家校沟通</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-tab w-full flex items-center py-3 px-4 rounded-md text-gray-600 font-medium hover:bg-purple-50 transition-all duration-200" data-tab="resources">
+                            <i class="fa fa-book w-6 text-center"></i>
+                            <span class="ml-3">教育资源</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="flex-1 ml-64 p-6">
+            <!-- 学习动态选项卡内容 -->
+            <div class="tab-content active" id="learning">
+                <!-- 欢迎信息 - 移到学习动态选项卡内部 -->
+                <div class="mb-8">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 text-shadow">欢迎回来，张妈妈</h2>
+                    <p class="text-gray-600 mt-2">这是小明本周的学习情况概览</p>
+                </div>
+
+                <!-- 学习概览卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">本周完成课程</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-1">8节</h3>
+                                <p class="text-green-600 text-sm mt-2 flex items-center">
+                                    <i class="fa fa-arrow-up mr-1"></i> 12% 较上周
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                <i class="fa fa-book text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">知识点掌握率</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-1">87%</h3>
+                                <p class="text-green-600 text-sm mt-2 flex items-center">
+                                    <i class="fa fa-arrow-up mr-1"></i> 5% 较上周
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                <i class="fa fa-check-circle text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">完成作品数</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-1">12个</h3>
+                                <p class="text-green-600 text-sm mt-2 flex items-center">
+                                    <i class="fa fa-arrow-up mr-1"></i> 3个 较上周
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                <i class="fa fa-cubes text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium">学习时长</p>
+                                <h3 class="text-3xl font-bold text-gray-800 mt-1">12.5h</h3>
+                                <p class="text-red-600 text-sm mt-2 flex items-center">
+                                    <i class="fa fa-arrow-down mr-1"></i> 2h 较上周
+                                </p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                <i class="fa fa-clock-o text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 学习进度图表 -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- 课程完成趋势图 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow lg:col-span-2">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-bold text-lg text-gray-800">课程完成趋势</h3>
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1 text-sm rounded-md bg-purple-100 text-purple-700">周</button>
+                                <button class="px-3 py-1 text-sm rounded-md text-gray-500">月</button>
+                                <button class="px-3 py-1 text-sm rounded-md text-gray-500">学期</button>
+                            </div>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="courseTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 知识点掌握雷达图 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <h3 class="font-bold text-lg text-gray-800 mb-6">知识点掌握情况</h3>
+                        <div class="h-64">
+                            <canvas id="knowledgeRadarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 薄弱项提醒 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-shadow mb-8">
+                    <h3 class="font-bold text-lg text-gray-800 mb-4">薄弱项提醒</h3>
+                    <div class="space-y-4">
+                        <div class="p-4 border-l-4 border-yellow-500 bg-yellow-50 rounded-md">
+                            <h4 class="font-medium text-yellow-800">逻辑循环语句应用不足</h4>
+                            <p class="text-yellow-700 text-sm mt-1">在复杂编程任务中，孩子对循环结构的理解需要加强</p>
+                            <div class="mt-3 bg-white p-3 rounded-lg">
+                                <p class="text-sm font-medium text-gray-700">家长引导建议：</p>
+                                <p class="text-sm text-gray-600 mt-1">可以和孩子一起通过日常生活中的重复任务（如整理玩具、制定学习计划）来理解循环的概念</p>
+                            </div>
+                        </div>
+                        <div class="p-4 border-l-4 border-yellow-500 bg-yellow-50 rounded-md">
+                            <h4 class="font-medium text-yellow-800">问题分析能力需要提升</h4>
+                            <p class="text-yellow-700 text-sm mt-1">在遇到编程挑战时，孩子需要更多引导来分解问题</p>
+                            <div class="mt-3 bg-white p-3 rounded-lg">
+                                <p class="text-sm font-medium text-gray-700">家长引导建议：</p>
+                                <p class="text-sm text-gray-600 mt-1">鼓励孩子将复杂问题拆分成小步骤，先解决简单部分，逐步构建完整解决方案</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 实践记录 -->
+                <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                    <h3 class="font-bold text-lg text-gray-800 mb-4">实践记录</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- 作品卡片 -->
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://picsum.photos/400/200" alt="机器人作品" class="w-full h-48 object-cover">
+                                <div class="absolute top-2 right-2 bg-purple-600 text-white text-xs py-1 px-2 rounded">
+                                    上周完成
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-medium text-gray-800">智能避障机器人</h4>
+                                <p class="text-sm text-gray-500 mt-1">利用红外传感器实现障碍物检测和避让</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star-half-o text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">4.5/5</span>
+                                    </div>
+                                    <button class="text-purple-600 hover:text-purple-800 transition-colors">
+                                        <i class="fa fa-play-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://picsum.photos/401/200" alt="机器人作品" class="w-full h-48 object-cover">
+                                <div class="absolute top-2 right-2 bg-green-600 text-white text-xs py-1 px-2 rounded">
+                                    本周完成
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-medium text-gray-800">语音控制小车</h4>
+                                <p class="text-sm text-gray-500 mt-1">通过语音指令控制小车的前进、后退和转向</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star text-yellow-400"></i>
+                                        <i class="fa fa-star-o text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">4.0/5</span>
+                                    </div>
+                                    <button class="text-purple-600 hover:text-purple-800 transition-colors">
+                                        <i class="fa fa-play-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img src="https://picsum.photos/402/200" alt="机器人比赛" class="w-full h-48 object-cover">
+                                <div class="absolute top-2 right-2 bg-blue-600 text-white text-xs py-1 px-2 rounded">
+                                    竞赛参与
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-medium text-gray-800">校级机器人挑战赛</h4>
+                                <p class="text-sm text-gray-500 mt-1">参与机器人竞速项目，获得小组第三名</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-trophy text-yellow-500"></i>
+                                        <span class="text-xs text-gray-500 ml-1">小组第三名</span>
+                                    </div>
+                                    <button class="text-purple-600 hover:text-purple-800 transition-colors">
+                                        <i class="fa fa-picture-o"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 家校沟通选项卡内容 -->
+            <div class="tab-content hidden" id="communication">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- 教师消息 -->
+                    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">教师消息</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                            <i class="fa fa-user-circle"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-800">李老师</p>
+                                            <p class="text-xs text-gray-500">编程教师</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">10分钟前</span>
+                                </div>
+                                <p class="text-gray-600 text-sm line-clamp-2">小明本周的编程作业完成得很好，特别是在循环语句的应用上有了明显进步。不过在变量命名规范方面还需要加强，请家长也可以在这方面给予引导。</p>
+                                <div class="mt-2 flex justify-between items-center">
+                                    <span class="inline-block px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded">作业反馈</span>
+                                    <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                            <i class="fa fa-user-circle"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-800">张老师</p>
+                                            <p class="text-xs text-gray-500">班主任</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">昨天 14:30</span>
+                                </div>
+                                <p class="text-gray-600 text-sm line-clamp-2">通知：下周三（6月15日）下午3点将举行线上家长会，主要内容是关于本学期机器人课程的学习情况汇报和下学期课程规划，请家长准时参加。</p>
+                                <div class="mt-2 flex justify-between items-center">
+                                    <span class="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">家长会通知</span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                            <i class="fa fa-user-circle"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-gray-800">李老师</p>
+                                            <p class="text-xs text-gray-500">编程教师</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-gray-500">3天前</span>
+                                </div>
+                                <p class="text-gray-600 text-sm line-clamp-2">提醒：下周一将进行阶段性测试，内容包括基本编程概念、逻辑结构和简单机器人搭建。请提醒小明做好复习准备。</p>
+                                <div class="mt-2 flex justify-between items-center">
+                                    <span class="inline-block px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded">作业提醒</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <button class="px-4 py-2 text-sm text-purple-600 hover:text-purple-800 transition-colors">
+                                查看全部消息 <i class="fa fa-angle-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 家长会/直播回放 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">家长会/直播回放</h3>
+                        <div class="space-y-4">
+                            <div class="relative rounded-lg overflow-hidden">
+                                <img src="https://picsum.photos/403/200" alt="家长会" class="w-full h-40 object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+                                    <button class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-purple-600">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+                                    <h4 class="text-white font-medium text-sm">5月班级家长会</h4>
+                                    <p class="text-white/80 text-xs mt-1">2025-05-15</p>
+                                </div>
+                            </div>
+
+                            <div class="relative rounded-lg overflow-hidden">
+                                <img src="https://picsum.photos/404/200" alt="课堂表现" class="w-full h-40 object-cover">
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+                                    <button class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-purple-600">
+                                        <i class="fa fa-play"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+                                    <h4 class="text-white font-medium text-sm">小明课堂表现片段</h4>
+                                    <p class="text-white/80 text-xs mt-1">2025-06-01</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <!-- 教育资源选项卡内容 -->
+            <div class="tab-content hidden" id="resources">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- 家长指南 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">家长指南</h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-3 p-3 border-b border-gray-100 hover:bg-gray-50 rounded-md transition-colors cursor-pointer">
+                                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0">
+                                    <i class="fa fa-book"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">如何引导孩子进行机器人编程学习</h4>
+                                    <p class="text-sm text-gray-500 mt-1">了解如何在家中为孩子创造良好的编程学习环境</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3 p-3 border-b border-gray-100 hover:bg-gray-50 rounded-md transition-colors cursor-pointer">
+                                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0">
+                                    <i class="fa fa-question-circle"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">机器人编程学习常见问题解答</h4>
+                                    <p class="text-sm text-gray-500 mt-1">解答家长在孩子学习过程中遇到的常见疑问</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3 p-3 border-b border-gray-100 hover:bg-gray-50 rounded-md transition-colors cursor-pointer">
+                                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0">
+                                    <i class="fa fa-line-chart"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">如何评估孩子的编程学习效果</h4>
+                                    <p class="text-sm text-gray-500 mt-1">了解如何科学地评估孩子的编程技能发展</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-3 p-3 border-b border-gray-100 hover:bg-gray-50 rounded-md transition-colors cursor-pointer">
+                                <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">家庭编程活动指南</h4>
+                                    <p class="text-sm text-gray-500 mt-1">适合亲子共同参与的编程游戏和活动推荐</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 家长沙龙 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 card-shadow">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">家长沙龙</h3>
+                        <div class="space-y-4">
+                            <div class="relative rounded-lg overflow-hidden">
+                                <img src="https://picsum.photos/405/200" alt="家长沙龙" class="w-full h-40 object-cover">
+                                <div class="absolute top-2 right-2 bg-red-500 text-white text-xs py-1 px-2 rounded">
+                                    即将开始
+                                </div>
+                                <div class="p-4">
+                                    <h4 class="font-medium text-gray-800">机器人教育发展趋势与未来职业规划</h4>
+                                    <div class="flex items-center gap-4 mt-2 text-sm text-gray-500">
+                                        <div class="flex items-center gap-1">
+                                            <i class="fa fa-calendar"></i>
+                                            <span>2025-06-20</span>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span>19:30-21:00</span>
+                                        </div>
+                                    </div>
+                                    <button class="mt-3 w-full py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm">
+                                        立即报名
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="relative rounded-lg overflow-hidden">
+                                <img src="https://picsum.photos/406/200" alt="家长沙龙" class="w-full h-40 object-cover">
+                                <div class="p-4">
+                                    <h4 class="font-medium text-gray-800">如何培养孩子的计算思维与问题解决能力</h4>
+                                    <div class="flex items-center gap-4 mt-2 text-sm text-gray-500">
+                                        <div class="flex items-center gap-1">
+                                            <i class="fa fa-calendar"></i>
+                                            <span>2025-06-05</span>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span>19:30-21:00</span>
+                                        </div>
+                                    </div>
+                                    <button class="mt-3 w-full py-2 bg-white border border-purple-600 text-purple-600 rounded-md hover:bg-purple-50 transition-colors text-sm">
+                                        查看回放
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <!-- 移动端菜单按钮 -->
+    <button id="mobileMenuBtn" class="fixed bottom-4 right-4 w-12 h-12 rounded-full bg-purple-600 text-white shadow-lg flex items-center justify-center md:hidden">
+        <i class="fa fa-bars text-xl"></i>
+    </button>
+
+    <script>
+        // 选项卡切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有导航标签和内容面板
+            const navTabs = document.querySelectorAll('.nav-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const sidebar = document.querySelector('aside');
+            const mainContent = document.querySelector('main');
+            const footer = document.querySelector('footer');
+            const useLimitToggle = document.getElementById('useLimitToggle');
+            const useLimitSettings = document.getElementById('useLimitSettings');
+            
+            // 选项卡切换逻辑
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有标签的active类
+                    navTabs.forEach(t => t.classList.remove('active', 'bg-purple-600', 'text-white'));
+                    navTabs.forEach(t => t.classList.add('text-gray-600'));
+                    
+                    // 为当前标签添加active类
+                    this.classList.add('active', 'bg-purple-600', 'text-white');
+                    this.classList.remove('text-gray-600');
+                    
+                    // 隐藏所有内容面板
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // 显示对应内容面板
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.remove('hidden');
+                    
+                    // 在移动设备上点击后关闭侧边栏
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.toggle('translate-x-0');
+                        sidebar.classList.toggle('-translate-x-full');
+                    }
+                });
+            });
+            
+            // 移动设备菜单切换
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    sidebar.classList.toggle('-translate-x-full');
+                    sidebar.classList.toggle('translate-x-0');
+                });
+            }
+            
+            // 使用限制开关逻辑
+            if (useLimitToggle && useLimitSettings) {
+                useLimitToggle.addEventListener('change', function() {
+                    if (this.checked) {
+                        useLimitSettings.classList.remove('hidden');
+                    } else {
+                        useLimitSettings.classList.add('hidden');
+                    }
+                });
+            }
+            
+            // 时间限制开关样式切换
+            const toggleSwitches = document.querySelectorAll('input[type="checkbox"]');
+            toggleSwitches.forEach(switchEl => {
+                switchEl.addEventListener('change', function() {
+                    const slider = this.nextElementSibling;
+                    if (this.checked) {
+                        slider.classList.add('bg-purple-600');
+                        slider.classList.remove('bg-gray-300');
+                        slider.classList.add('before:translate-x-5');
+                    } else {
+                        slider.classList.remove('bg-purple-600');
+                        slider.classList.add('bg-gray-300');
+                        slider.classList.remove('before:translate-x-5');
+                    }
+                });
+                
+                // 初始化开关状态
+                const slider = switchEl.nextElementSibling;
+                if (switchEl.checked) {
+                    slider.classList.add('bg-purple-600');
+                    slider.classList.remove('bg-gray-300');
+                    slider.classList.add('before:translate-x-5');
+                } else {
+                    slider.classList.remove('bg-purple-600');
+                    slider.classList.add('bg-gray-300');
+                    slider.classList.remove('before:translate-x-5');
+                }
+            });
+            
+            // 初始化图表
+            // 课程完成趋势图
+            const courseTrendCtx = document.getElementById('courseTrendChart');
+            if (courseTrendCtx) {
+                new Chart(courseTrendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                        datasets: [{
+                            label: '完成课程',
+                            data: [1, 2, 1, 0, 3, 0, 1],
+                            borderColor: '#9333ea',
+                            backgroundColor: 'rgba(147, 51, 234, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 知识点掌握雷达图
+            const knowledgeRadarCtx = document.getElementById('knowledgeRadarChart');
+            if (knowledgeRadarCtx) {
+                new Chart(knowledgeRadarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['基础概念', '逻辑思维', '循环结构', '条件判断', '问题解决'],
+                        datasets: [{
+                            label: '掌握程度',
+                            data: [90, 75, 65, 85, 70],
+                            backgroundColor: 'rgba(147, 51, 234, 0.2)',
+                            borderColor: '#9333ea',
+                            pointBackgroundColor: '#9333ea'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 响应式调整
+            function handleResize() {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('translate-x-0');
+                    sidebar.classList.remove('fixed');
+                    mainContent.classList.remove('ml-64');
+                    footer.classList.remove('ml-64');
+                } else {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('translate-x-0');
+                    sidebar.classList.add('fixed');
+                    mainContent.classList.add('ml-64');
+                    footer.classList.add('ml-64');
+                }
+            }
+            
+            // 初始调用
+            handleResize();
+            
+            // 监听窗口大小变化
+            window.addEventListener('resize', handleResize);
+        });
+    </script>
+</body>
+</html>

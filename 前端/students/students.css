@@ -1,0 +1,129 @@
+/* 用户菜单模态框样式增强 */
+#user-menu-modal {
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#user-menu-modal > div {
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    border-radius: 16px;
+    border: 1px solid #334155;
+    box-shadow: 
+        0 10px 40px rgba(138, 43, 226, 0.25),
+        0 0 60px rgba(138, 43, 226, 0.15);
+    animation: slideUp 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#user-menu-modal > div::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 70%);
+    animation: rotate 25s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+#user-menu-modal .modal-content {
+    position: relative;
+    z-index: 1;
+}
+
+#close-user-menu-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+#close-user-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+    color: #ffffff;
+}
+
+#user-menu-modal h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+}
+
+#user-menu-modal .bg-purple-500\/20 {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.3) 0%, rgba(156, 39, 176, 0.2) 100%);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+    transition: all 0.3s ease;
+}
+
+#user-menu-modal .bg-purple-500\/20:hover {
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+    transform: scale(1.05);
+}
+
+#user-menu-modal .p-2 button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#user-menu-modal .p-2 button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+#user-menu-modal .p-2 button:hover::before {
+    left: 100%;
+}
+
+#logout-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#logout-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+#logout-btn:hover::before {
+    left: 100%;
+}

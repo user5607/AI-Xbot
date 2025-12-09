@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>图形化编程平台</title>
+        <script src="../../lib/node_modules/blockly/blockly_compressed.js"></script>
+        <script src="../../lib/node_modules/blockly/blocks_compressed.js"></script>
+        <script src="../../lib/node_modules/blockly/python_compressed.js"></script>
+        <script src="../../lib/node_modules/blockly/javascript_compressed.js"></script> <!-- 添加JavaScript生成器 -->
+        <script src="../../lib/node_modules/blockly/msg/zh-hans.js"></script>
+        <script src="platform.js"></script>
+        <script src="blocks.js"></script>
+        <script src="generators.js"></script>
+        <link rel="stylesheet" href="platform.css">
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <!-- 添加四个动态角色 -->
+                <div class="animated-characters">
+                    <div class="robot-character dog-left"></div>
+                    <div class="robot-character robot-left"></div>
+                    <div class="robot-character robot-right"></div>
+                    <div class="robot-character dog-right"></div>
+                </div>
+                
+                <h1>AI XBot 图形化编程课堂</h1>
+                <div class="toolbar">
+                </div>
+            </header>
+            
+            <main>
+                <div class="workspace-wrapper">
+                    <div class="workspace-toolbar">
+                        <div class="dropdown">
+                            <button class="dropbtn">文件</button>
+                            <div class="dropdown-content">
+                                <a href="#" id="newFile">新建</a>
+                                <a href="#" id="openFile">打开</a>
+                                <a href="#" id="saveFile">保存</a>
+                                <a href="#" id="exportCode">导出代码</a>
+                            </div>
+                        </div>
+                        
+                        <button id="undoButton">撤销</button>
+                        <button id="redoButton">重做</button>
+                        <button id="clearButton">清空</button>
+                        <button id="generateCodeButton">生成代码</button>
+                    </div>
+                    <div class="blockly-container">
+                        <div id="blocklyDiv" style="width:100%;height:100%"></div>
+                    </div>
+                </div>
+                
+                <div class="control-panel">
+                    <div class="panel-section">
+                        <h3>课堂任务</h3>
+                        <div id="taskContainer" style="margin-bottom: 15px;">
+                            <div style="margin-bottom: 8px;">
+                                <strong>任务标题：</strong>
+                                <span id="taskTitle">超声波避障基础任务</span>
+                            </div>
+                            <div style="margin-bottom: 8px;">
+                                <strong>任务描述：</strong>
+                                <p id="taskDescription" style="margin: 5px 0; font-size: 0.9rem;">使用超声波传感器检测前方障碍物，并在检测到障碍物时自动停止。</p>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <strong>难度：</strong>
+                                <span id="taskDifficulty" class="difficulty-medium">中等</span>
+                            </div>
+                            <button id="submitTaskButton" style="width: 100%; padding: 8px; background-color: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;">提交任务</button>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h3>运行控制</h3>
+                        <button id="compileButton" style="width: 100%; margin-bottom: 5px;">🔄 编译</button>
+                        <button id="playButton" style="width: 100%; margin-bottom: 5px;">▶️ 运行</button>
+                        <button id="stopButton" style="width: 100%; margin-bottom: 5px;">⏹️ 停止</button>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h3>机器人状态</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <p id="robotStatus" style="margin: 0; color: #6b7280;">
+                                <span id="statusIcon" style="margin-right: 5px;">连接状态：离线</span>
+                            </p>
+                            <button id="connectButton" style="padding: 4px 12px; background-color: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">🔌 连接</button>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span id="batteryText" style="font-weight: 500;">电量:</span>
+                                <span id="batteryLevel" style="font-weight: 600; color: #10b981;">0%</span>
+                            </div>
+                            <div style="width: 100%; height: 8px; background-color: #e5e7eb; border-radius: 4px; overflow: hidden;">
+                                <div id="batteryProgress" style="height: 100%; width: 0%; background-color: #10b981; border-radius: 4px; transition: width 0.5s ease;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            <div class="resizer" id="resizer"></div>
+            
+            <div class="console" id="console">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3>日志控制台</h3>
+                    <button id="clearLogButton">清空</button>
+                </div>
+                <div id="logOutput" class="log-output"></div>
+            </div>
+        </div>
+
+        <div id="toolbox-container" style="display: none;"></div>
+
+    </body>
+</html>
