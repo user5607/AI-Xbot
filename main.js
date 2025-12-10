@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // 第80-150行：学生登录逻辑
         const role = activeTab.getAttribute('data-role');
         
-        // Render上的后端API地址，请替换为您实际的Render后端URL
-        const API_URL = 'https://aixbot-gyzc.onrender.com';
+        // Cloudflare Workers后端API地址
+        const API_URL = 'https://aixbot-worker.3161769691.workers.dev';
         
         // 根据不同角色进行表单验证和提交
         if (role === 'student') {

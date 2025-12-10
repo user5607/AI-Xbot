@@ -44,12 +44,24 @@ async function validateStudentLogin(studentInfo) {
     }
     
     try {
-        // 这里应该是实际的API调用，现在使用模拟数据
-        // const response = await fetch('/api/student/login', { ... });
-        // const result = await response.json();
+        // 实际API调用到Cloudflare Workers后端
+        const response = await fetch('https://aixbot-worker.3161769691.workers.dev/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                role: USER_ROLE.STUDENT,
+                username: studentInfo.studentId,
+                password: studentInfo.password,
+                school: studentInfo.school
+            })
+        });
         
-        // 模拟登录验证
-        if (studentInfo.studentId && studentInfo.password) {
+        const result = await response.json();
+        
+        if (result.success) {
+            // 如果登录成功，返回用户信息
             return {
                 success: true,
                 message: '登录成功',
@@ -57,21 +69,21 @@ async function validateStudentLogin(studentInfo) {
                     role: USER_ROLE.STUDENT,
                     name: studentInfo.name,
                     school: studentInfo.school,
-                    studentId: studentInfo.studentId,
-                    // 其他用户信息
+                    studentId: studentInfo.studentId
                 }
             };
         } else {
+            // 登录失败，返回错误信息
             return {
                 success: false,
-                message: '学号或密码错误'
+                message: result.message || '登录失败'
             };
         }
     } catch (error) {
         console.error('学生登录验证错误:', error);
         return {
             success: false,
-            message: '登录失败，请稍后重试'
+            message: '网络错误，请检查网络连接后重试'
         };
     }
 }
@@ -94,26 +106,38 @@ async function validateTeacherParentLogin(userInfo) {
     }
     
     try {
-        // 这里应该是实际的API调用，现在使用模拟数据
-        // const response = await fetch('/api/teacher/login', { ... });
-        // const result = await response.json();
+        // 实际API调用到Cloudflare Workers后端
+        const response = await fetch('https://aixbot-worker.3161769691.workers.dev/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                role: userInfo.role,
+                username: userInfo.username,
+                password: userInfo.password
+            })
+        });
         
-        // 模拟登录验证
-        if (userInfo.username && userInfo.password) {
+        const result = await response.json();
+        
+        // 使用实际的API响应
+        if (result.success) {
+            // 如果登录成功，返回用户信息
             return {
                 success: true,
                 message: '登录成功',
                 userInfo: {
-                    role: userInfo.role || USER_ROLE.TEACHER,
-                    username: userInfo.username,
-                    displayName: userInfo.username,
-                    // 其他用户信息
+                    role: result.user.role,
+                    username: result.user.name,
+                    displayName: result.user.name
                 }
             };
         } else {
+            // 登录失败，返回错误信息
             return {
                 success: false,
-                message: '用户名或密码错误'
+                message: result.message || '登录失败'
             };
         }
     } catch (error) {
