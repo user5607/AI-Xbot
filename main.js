@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             try {
-                console.log('发送学生登录请求:', {role: 'student', username: studentId, school: school});
+                console.log('发送学生登录请求:', {role: 'student', username: studentId});
                 // 调用后端API进行登录验证
                 const response = await fetch(`${API_URL}/api/auth/login`, {
                     method: 'POST',
@@ -127,12 +127,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify({
                         role: 'student',
                         username: studentId,
-                        password: password,
-                        school: school
+                        password: password
                     })
                 });
                 
                 console.log('学生登录响应状态:', response.status);
+                
+                if (!response.ok) {
+                    console.error('登录请求失败，状态码:', response.status);
+                    // 尝试解析错误响应
+                    try {
+                        const errorData = await response.json();
+                        console.error('错误响应数据:', errorData);
+                        confirm('登录失败：' + (errorData.message || '服务器错误'));
+                    } catch (e) {
+                        console.error('无法解析错误响应:', e);
+                        confirm('登录失败：服务器错误');
+                    }
+                    return;
+                }
+                
                 const data = await response.json();
                 console.log('学生登录响应数据:', data);
                 
@@ -141,9 +155,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 登录成功，保存用户信息到本地存储
                     const userInfo = {
                         role: 'student',
-                        name: name,
-                        studentId: studentId,
-                        school: school
+                        name: data.user?.name || name,
+                        studentId: data.user?.studentId || studentId,
+                        school: data.user?.school || school
                     };
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     // 跳转到students.html页面
@@ -203,6 +217,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 console.log('教师登录响应状态:', response.status);
+                
+                if (!response.ok) {
+                    console.error('登录请求失败，状态码:', response.status);
+                    // 尝试解析错误响应
+                    try {
+                        const errorData = await response.json();
+                        console.error('错误响应数据:', errorData);
+                        confirm('登录失败：' + (errorData.message || '服务器错误'));
+                    } catch (e) {
+                        console.error('无法解析错误响应:', e);
+                        confirm('登录失败：服务器错误');
+                    }
+                    return;
+                }
+                
                 const data = await response.json();
                 console.log('教师登录响应数据:', data);
                 
@@ -211,8 +240,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 登录成功，保存用户信息到本地存储
                     const userInfo = {
                         role: 'teacher',
-                        name: name,
-                        teacherId: id
+                        name: data.user?.name || name,
+                        teacherId: data.user?.teacherId || id,
+                        school: data.user?.school || ''
                     };
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     // 登录成功，直接跳转
@@ -272,6 +302,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 console.log('家长登录响应状态:', response.status);
+                
+                if (!response.ok) {
+                    console.error('登录请求失败，状态码:', response.status);
+                    // 尝试解析错误响应
+                    try {
+                        const errorData = await response.json();
+                        console.error('错误响应数据:', errorData);
+                        confirm('登录失败：' + (errorData.message || '服务器错误'));
+                    } catch (e) {
+                        console.error('无法解析错误响应:', e);
+                        confirm('登录失败：服务器错误');
+                    }
+                    return;
+                }
+                
                 const data = await response.json();
                 console.log('家长登录响应数据:', data);
                 
@@ -280,8 +325,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     // 登录成功，保存用户信息到本地存储
                     const userInfo = {
                         role: 'parent',
-                        account: account,
-                        childName: childName
+                        name: data.user?.name || account,
+                        account: data.user?.name || account,
+                        childName: data.user?.childName || childName,
+                        school: data.user?.school || ''
                     };
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     // 登录成功，直接跳转
